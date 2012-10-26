@@ -1,0 +1,30 @@
+DOBLO: DUPLO-compatible scenery factory
+
+Version 2.0 - oct 2012
+- modularized and source-controlled
+- functional passing of scale for each element
+- allows mixing of doblo and lego sizes in one model
+
+Version 1.9, 1.10 and 1.11 - oct 2012
+- fixed some bugs
+- increased size of duplo bottom-nibbles a tiny bit
+- made it somewhat 0.25 SCALE compatible
+
+Version 1.8.1 - Sept 10 2012
+- added a grid on underneath the bridges that will stabilize nibbles and maybe help printing a duplo block with a high resolution printer. If set to 0, it will not print this lattice. The result underneath will remain ugly with a lattice, but the model is easier to print.
+- fixed a bug I totally missed (uneven blocks, e.g. 3x3 had missing nibbles underneath)
+- Multiplied parameters for better calibration
+- Added an easy to print base plate (revised for 1.8.1)
+
+Version 1.6 - May 1 2012
+- added lozenges aka diamonds (optional) to the low end of walls for ABS printing
+- adapted constants for 0.25mm printing (felixprinter, fabbster)
+
+Version 1.5 - 2011
+- bugfixes
+
+Version 1.3 - May 1 2010
+- Added better Lego compatibility
+- Still not fully tested
+- Set the SCALE variable in your module file, else the module will exit with an error !!
+

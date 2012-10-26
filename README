@@ -2,6 +2,7 @@
  Copyright (c) 2012 Daniel M. Taub
  
  This file is part of DobloFactory.
+ DOBLO: DUPLO-compatible scenery factory
 
  DobloFactory is free source: you can redistribute it and/or modify
     modify it under the terms of the CC BY-NC-SA 3.0 License:
@@ -11,3 +12,145 @@
     You should have received a copy of the CC BY-NC-SA 3.0 License 
     with this source package. 
     If not, see <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+
+
+Read down to understand how to use this.
+Documentation (similar as here, but more readable)
+ http://edutechwiki.unige.ch/en/Doblo_factory
+
+Download:
+- http://www.thingiverse.com/thing:2106
+
+BUGS, missing pieces, other things to do:
+- cyl_block nibbles can't handle top_r < 2 and rational numbers
+- a pilar with both supports for bottom and top (i.e. 2x4 directions)
+- replace support by triangle_forward, triangle_right, etc.
+- Lego brick heights work in multiples of 3 (Duplos is multiples of 2)
+- test STL merging with both Lego models
+
+Authors:
+- Daniel K. Schneider, TECFA, University of Geneva, March 2010
+- refactored by Daniel M. Taub, CEMI.org, October 2012 
+- based on parametric lego duplo (http://www.thingiverse.com/thing:1778) by Domonoky
+- based on OpenSCAD Bitmap Fonts Module (http://www.thingiverse.com/thing:2054) by Tony Buser.
+
+This code is derived from two original works: 
+1) Domonoky's parametric lego duplo - http://www.thingiverse.com/thing:1778. 
+  I got the idea, and then kept some of the fine parts (nibbles, walls, etc,)
+2) Tony Buser's OpenSCAD Bitmap Fonts Module - http://www.thingiverse.com/thing:2054
+
+Legal disclaimer: 
+- This is not Duplo(TM), it's called Doblo and it just happens to fit more or less.
+
+Purposes:
+ - Creation of 3D duplo-compatible "play" boards for various purposes from Kindergarten to Master level
+ - Introduction to 3D environnment (learn about positions) and use of OpenSCAD
+ - "End-user 3D programming" environment (e.g. students could add other primitives)
+
+Coordinate system: 
+ We use  a column/row/up grid, each x/y cell corresponds to a DUPLO/Lego nibble
+ - col = x-axis
+ - row = y-axis
+ - origin is at x=0 and y=0, default bottom of bricks is z=0
+ - each block module starts from left/back ("upper" left corner)
+
+ units for col/row  and width/length:
+* 1 DUPLO row (16mm, i.e. half a 2x2 block)
+* 1 LEGO  row (8mm)
+ units for up and height: 
+* DUPLO: 4.8mm, i.e. a 1/4th of a typical duplo 19.2mm 2x2 block
+* LEGO : 2.4mm, i.e. a 1/4th of a typical duplo 19.2mm 2x2 block.
+  Should be rather 1/3 (3.2mm) but I can't change this easily without breaking stuff (castles)
+
+Software needed:
+- http://openscad.org/
+- http://en.wikibooks.org/wiki/OpenSCAD_User_Manual
+Once you installed openscad, then you may have a glance at the manual. Otherwise, just know this:
+ - To compile a .scad file (see the result)
+   1. Menu: File->Open
+   2. menu: Design->Compile
+ - To render for real and to export
+   1. menu: Design-> Compile and Render (CGAL) .... this can take many minutes.
+   2. menu: Design-> Export as .STL 
+
+Usage:
+ (1) Create a new .scad file or start from doblo-factory-examples.scad
+ (2) Import this file:
+     include doblo-factory-1-2.scad
+ (3) Set the SCALE variable !!!
+ (4) Then, either write custom modules to create any combinations of
+ block forms and imported STL or use the merge_brick standard module
+ to pile up 3 objects: a doblo, a block and one imported STL
+
+ See examples in the file doblo-factory-examples.scad
+
+Printing:
+ - To print larger structures be aware of warping, e.g. make a fat sticky raft and/or use cooling and/or print with PLA.
+ - If you need good DUPLO compatibility, you will have to print with small layers !
+ - Large structures can take many hours to print. 
+
+To create your own more complex custom shapes, there are several modules (functions). For example:
+
+(1) The doblo brick. 
+Typically, to create a DOBLO base (you also can pile them up (union) but may lead to a waste of plastic. Doblo bricks are just like Duplo bricks, however you can make the nibbles on top optional.
+
+module doblo (col, row, up, width,length,height,nibbles_on_off) 
+
+(2) Merge STL files
+Positions an stl file, you may have to find out by trial and error what z offset to use. Tip: embed the STL into a doblo or a block.
+module merge_stl (file, col, row, stl_z_offset_mm)
+
+(3) Blocks and base plate
+To create a building block for larger structures with x,y,z positioning. A block doesn't have nibbles underneath and may or may not have nibbles on top. 
+
+A base plate will have some grid underneath, because printing large flat blocks is usually very difficult. Using "up" other than 0 doesn't make much sense.
+
+module block (col, row, up, width,length,height,nibbles_on_off) 
+module base_plate (col, row, up, width,length,height,nibbles_on_off) 
+
+(4) Nibbles.
+To insert nibbles on some spots of a nibble-less block or an imported STL. To used in larger structures.
+
+module nibbles (col, row, up, width, length)
+
+(5) Bottom nibbles
+To insert underneath an imported STL. Not very usefull I think, I'd rather stick a doblo block to the feet of an imported object.
+
+module bottom_nibbles (col, row, up, width, length, N_height)
+
+(6) Support triangles
+Support triangles are used in larger structures to support a roof. 
+Thickness = 1 doblo width, e.g. = PART_WIDTH. Sometimes you may want rational numbers. E.g. 1.5
+Height/length proportion is 4.8/4 (i.e. typical Lego proportions). Only use angle arg of 0,90,180,270 !!
+
+WARNING: you may want to have these overlap a bit, e.g. if 2 corners are just touching, the model will be not simple and can't be exported as STL. In other words, make them a bit higher (embedded into the block that you will put on the back and the top of the triangles anyhow. See the stronghold example included.
+ __
+ \|
+
+module support (col,row,up,height,rotation_angle,thickness)
+
+(7) ramp
+Is the opposite of the support triangle, but with a flatter angle. Can be used to achor a high and slim block or also to build a real ramp (then you might place 2-4 next to each other.)
+Height/length proportion is 4.8/16 (i.e. typical Lego proportions)
+
+module ramp (col,row,up,height,rotation_angle)
+
+(8) Cylinder
+Is like a block, but round, i.e. meant to used for larger structures . Can have nibbles on top.
+
+module cyl_block (col, row, up, bottom_r, top_r, height, nibbles_on_off) 
+
+(9) Glyph
+Adds a character, based on http://www.thingiverse.com/thing:2054
+Size: fits on a 2-x2 doblo unit
+height_mm is height in mm. Typically between 2 and 4
+
+module glyph (col, row, up, height_mm, char)
+
+(10) Text
+Adds a text, based on http://www.thingiverse.com/thing:2054
+Size: fits on a 2-x2 doblo unit
+height_mm is height in mm. Typically between 2 and 4
+
+module text (col, row, up, height_mm, chars, count)
+
