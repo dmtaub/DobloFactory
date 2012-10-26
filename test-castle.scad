@@ -1,3 +1,10 @@
+/* Castle kit, Lego and Duplo compatible-- examples
+Daniel.schneider@tecfa.unige.ch
+sept. 2012
+
+modified as an extension to doblo-factory v2.0 by dmtaub@cemi.org
+*/
+
 // setting LEGO_DIV to true will make Lego models higher, i.e. height units will be use "Lego heights" 3.2mm instead of the 2.4mm/4.8mm Duplo proportions. This param will not affect DUPLOs (scale > 0.6)
 
 LEGO_DIV = true;     // height units = 3.2mm, use for true Lego height divisions
@@ -5,15 +12,17 @@ LEGO_DIV = true;     // height units = 3.2mm, use for true Lego height divisions
 
 // LOAD doblo factory
 include <doblo-factory.scad>;
-
+// LOAD castle kit extension
 include <ext/castle-kit-1-9.scad>;
 
 // SCALE=1;   // DUPLO Size (not fully tested)
 SCALE =0.5;   // Lego size (same as SCALE = LUGO;)
 // SCALE=0.25; // Half lego size (1/8 volume)
 
-
-doblo       (-4,  -4,   0,  8,   2,    2,     false, SCALE);
+// can override global scale for a single model, thus combining scales.
+// uncomment the following 2 lines for an example: 
+// large_example (SCALE=.5);          
+// tower_legobase(SCALE=.25);           
 
 
 // ----------------  Execute models. Uncomment only one
