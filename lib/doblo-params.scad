@@ -50,7 +50,7 @@ if (str(LEGO_DIV) == "undef")
 // Mini Lego size 
 // SCALE = 0.25
 
-CADRO = 2;
+CADRO = 2; // not yet tested
 DOBLO = 1;
 LUGO = 0.5;
 MINI = 0.25;

@@ -597,28 +597,28 @@ module support (col,row,up,height,angle,thickness, scale)
 {
     if (angle == 0) {
 	translate ([0, 0, 0]) {
-	    support1 (col,row,up,height,angle,thickness, scale=scale);
+	    support1 (col,row,up,height,angle,thickness, scale);
 	}
     }
     if (angle == 90) {
 	translate ([0, -PART_WIDTH(scale) , 0]) {
-	    support1 (col,row,up,height,angle,thickness, scale=scale);
+	    support1 (col,row,up,height,angle,thickness, scale);
 	}
     }
     if (angle == 180) {
 	translate ([PART_WIDTH(scale), -PART_WIDTH(scale) - PART_WIDTH(scale)* (thickness-1) , 0]) {
-	    support1 (col,row,up,height,angle,thickness, scale=scale);
+	    support1 (col,row,up,height,angle,thickness, scale);
 	}
     }
     if (angle == 270) {
 	translate ([PART_WIDTH(scale) + PART_WIDTH(scale) * (thickness-1), 0 , 0]) {
-	    support1 (col,row,up,height,angle,thickness, scale=scale);
+	    support1 (col,row,up,height,angle,thickness, scale);
 	}
     }
 }
 
 
-module support1 (col,row,up,height,angle,thickness)
+module support1 (col,row,up,height,angle,thickness, scale)
 {
     height_mm = height * PART_HEIGHT(scale) ;
     length_mm = height * PART_WIDTH(scale) / 4;
