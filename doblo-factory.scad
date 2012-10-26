@@ -75,7 +75,7 @@ module glyph_1 (col, row, up, size, height, char) {
     // source is included in this same file, but you could also download bitmap.scad from
     // http://github.com/tbuser/openscad-bitmap and include (uncomment the following line)
     // include <bitmap.scad>;
-    size_mm  = size*2*SCALE;
+    size_mm  = size*2*scale;
     col_mm    = col    * PART_WIDTH(scale) + PART_WIDTH(scale);
     row_mm    =  - ( 0 +  row * PART_WIDTH(scale) + PART_WIDTH(scale) );
     up_mm     = up  * PART_HEIGHT(scale);
@@ -222,7 +222,7 @@ module nibbles (col, row, up, width, length, scale)
     // echo ("x_start", x_start, "col", col);
     y_start =  - (  row * PART_WIDTH(scale) + NO(scale));
     // echo ("y_start", y_start, "row", row);
-    z_local = up * PART_HEIGHT(scale) + NH / 2;
+    z_local = up * PART_HEIGHT(scale) + NH(scale) / 2;
     translate ([x_start , y_start, z_local]) {
 	// 0,0 is left/back corner. Draw to the right (x) and forward (-y)
 	for(j=[1:length])
@@ -453,14 +453,14 @@ module base_plate (col, row, up, width,length,height,nibbles_on_off, scale)
 
 {
     // construction of the grid underneath
-    // spacing = (SCALE < 0.6) ? NBO(scale)/LATTICE_TYPE*2 : NBO(scale)/LATTICE_TYPE;
-    spacing = (SCALE > 0.6) ? NBO(scale) : NBO(scale)*2;
+    // spacing = (scale < 0.6) ? NBO(scale)/LATTICE_TYPE*2 : NBO(scale)/LATTICE_TYPE;
+    spacing = (scale > 0.6) ? NBO(scale) : NBO(scale)*2;
     offset  = NBO(scale);
     x_start = - width/2  * PART_WIDTH(scale) + NBO(scale);
     y_start = - length/2 * PART_WIDTH(scale) + NBO(scale);
     z_pos   = (LEGO_DIV) ? height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) * 2 : height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) - LATTICE_WIDTH(scale)/2 ;
-    n_rows  = (SCALE > 0.6) ? length-2 : (length-2)/2 ;  // Need less for legos
-    n_cols  = (SCALE > 0.6) ? width-2 :  (width-2)/2;
+    n_rows  = (scale > 0.6) ? length-2 : (length-2)/2 ;  // Need less for legos
+    n_cols  = (scale > 0.6) ? width-2 :  (width-2)/2;
 
     // positioning of the grid with respect to the cube
     x_0 = col    * PART_WIDTH(scale)  + width  * PART_WIDTH(scale) / 2.0;
@@ -682,12 +682,12 @@ module ramp1 (col,row,up,height,angle)
 
 module doblonibble() {
     // Lego size does not have holes in the nibbles
-    if (SCALE < 0.6) {
-	cylinder(r=NB_RADIUS(scale),           h=NH,  center=true,  $fs = 0.2);
+    if (scale < 0.6) {
+	cylinder(r=NB_RADIUS(scale),           h=NH(scale),  center=true,  $fs = 0.2);
     } else {
 	difference() {
-	    cylinder(r=NB_RADIUS(scale),       h=NH,  center=true,  $fs = 0.2);
-	    cylinder(r=NB_RADIUS_INSIDE(scale),h=NH+1,center=true,  $fs = 0.2);
+	    cylinder(r=NB_RADIUS(scale),       h=NH(scale),  center=true,  $fs = 0.2);
+	    cylinder(r=NB_RADIUS_INSIDE(scale),h=NH(scale)+1,center=true,  $fs = 0.2);
 	}
     }
 }
