@@ -162,7 +162,7 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
 	    if  (nibbles_on_off)
 		{
 		    //           (col,  row,      up,       width, length)
-		    nibbles (-width/2, -length/2, height/2, width, length, scale = scale);
+		    #nibbles (-width/2, -length/2, height/2, width, length, scale = scale);
 		}
 	    
 	    // nibbles underneath - only if x or y is bigger than 1
@@ -1723,4 +1723,4 @@ module 8bit_str(chars, char_count, block_size, height) {
 
 // example usage code removed by DKS
 
-// ------------------------------- end OpenSCAD Bitmap Fonts Module
+//------------------------------- end OpenSCAD Bitmap Fonts Module
