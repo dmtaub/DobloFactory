@@ -329,7 +329,7 @@ module bottom_nibbles_thin (width, length, height)
         else if (length == 1){
           for (i = [0:width-2])
           {
-              translate([i * NBO(scale), -NBO(scale)/2, 0]) doblobottomnibble_thin(height*PART_HEIGHT(scale),scale);
+              translate([i * NBO(scale), -NBO(scale)/2, 0]) doblobottomnibble_thin(height*PART_HEIGHT(scale),scale=scale);
           }
         }
       }
@@ -663,10 +663,8 @@ module doblobottomnibble(height_mm)
 
 module doblobottomnibble_thin(height_mm)
 {
-  difference() {
     cylinder(r=NB_BOTTOM_RADIUS(scale)/2,        h=height_mm,  center=true,$fs = 0.2);
-    cylinder(r=NB_BOTTOM_RADIUS_INSIDE(scale)/4, h=height_mm+1,center=true,$fs = 0.2);
-  }
+    //cylinder(r=NB_BOTTOM_RADIUS_INSIDE(scale)/4, h=height_mm+1,center=true,$fs = 0.2);
 
 }
 // ************************ GLYPH code ************************************************
