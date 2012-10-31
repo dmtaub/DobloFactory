@@ -92,6 +92,7 @@ function CROSS_LEN(SCALE)  = (PART_WIDTH(SCALE)-NB_RADIUS(SCALE)/2);
 // Bottom nibbles size definitions
 // Must be adjusted with respect to layer resolution and other slicing considerations
 function NB_BOTTOM_RADIUS(SCALE)        = (SCALE < 0.6) ? 6.5/2*LEGO_SCALE(SCALE) : 13.4/2*SCALE;
+function NB_BOTTOM_RADIUS_THIN(SCALE)        = (SCALE < 0.6) ? 3.5/2*LEGO_SCALE(SCALE) : 7.2/2*SCALE;
 // Real DUPLO = 13.48
 function NB_BOTTOM_RADIUS_INSIDE(SCALE) = (SCALE < 0.6) ? 4.8/2*LEGO_SCALE(SCALE) : 10.8/2*SCALE;
 // Real DUPLO = 10.73
@@ -101,6 +102,7 @@ function NB_BOTTOM_RADIUS_INSIDE(SCALE) = (SCALE < 0.6) ? 4.8/2*LEGO_SCALE(SCALE
 // walls - IMPORTANT: must be adjusted with respect to layer resolution and other slicing considerations
 function DOBLOWALL(SCALE) = (SCALE < 0.6) ? 1.2 * LEGO_SCALE(SCALE): 1.55 *SCALE; // Lego vs. Duplo, Lego is not 2x smaller
 
+function USE_INSET(SCALE) = (SCALE < 0.6) ? true : true;
 function INSET_WIDTH(SCALE)    = (SCALE < 0.6) ? 0.4 *LEGO_SCALE(SCALE) : 1.50 * SCALE; //little inset walls to make it stick
 function INSET_LENGTH(SCALE)  = (SCALE < 0.6) ? 3*DOBLOWALL(SCALE) : 4*DOBLOWALL(SCALE); // Legos have proportionally smaller insets
 

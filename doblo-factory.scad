@@ -162,7 +162,7 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
 	    if  (nibbles_on_off)
 		{
 		    //           (col,  row,      up,       width, length)
-		    #nibbles (-width/2, -length/2, height/2, width, length, scale = scale);
+		    nibbles (-width/2, -length/2, height/2, width, length, scale = scale);
 		}
 	    
 	    // nibbles underneath - only if x or y is bigger than 1
@@ -176,9 +176,10 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
 			bottom_lattice (width, length, height, scale = scale);
 		    }
 	    }
-        else {
+	    else {
 	        // big nibbles underneath
-		bottom_nibbles_part (width, length, height, scale = scale);
+		if (USE_INSET(scale))
+                  bottom_nibbles_part (width, length, height, scale = scale);
 		// lattice (for low resolution printers - e.g. 0.35 layers - this is not needed)
 		/*if (LATTICE_TYPE > 0 )
 		    { 
@@ -186,11 +187,12 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
 		    }
         */
         }
-            if (scale < 0.6) 
+            if ((scale < 0.6) && (!USE_INSET(scale)))
               {
                 bottom_nibbles_thin (width, length, height,scale=scale);
               }
 	    //little walls inside (insets)
+          if (USE_INSET(scale))
 	    difference() 
 		{
 		    union()
@@ -663,7 +665,7 @@ module doblobottomnibble(height_mm)
 
 module doblobottomnibble_thin(height_mm)
 {
-    cylinder(r=NB_BOTTOM_RADIUS(scale)/2,        h=height_mm,  center=true,$fs = 0.2);
+    cylinder(r=NB_BOTTOM_RADIUS_THIN(scale),        h=height_mm,  center=true,$fs = 0.2);
     //cylinder(r=NB_BOTTOM_RADIUS_INSIDE(scale)/4, h=height_mm+1,center=true,$fs = 0.2);
 
 }
