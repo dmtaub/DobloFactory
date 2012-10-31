@@ -25,11 +25,11 @@ translate([x,y,0])
   {   
     translate([x,y,-4])
     {
-      cylinder(3*PART_HEIGHT(DOBLO),2.5,2.5,$fs=.001);
+      cylinder(3*PART_HEIGHT(DOBLO),2.6,2.6,$fs=.001);
     }
   translate([x,y,6.2])
   {
-    cylinder(5/7*PART_HEIGHT(DOBLO),3.5,3.5,$fs=.001);
+    cylinder(5/7*PART_HEIGHT(DOBLO),3.2,3.2,$fs=.001);
   }
 }
   }
