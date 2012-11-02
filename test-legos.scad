@@ -80,11 +80,13 @@ module hinge1b(size,offx=0,offy=0){
       {  union(){
           difference(){
           cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
-          //#translate([w,w-y,0]) block (-w/4,offy,0,.5,.5,2,false,size);
-	      translate([0,0,-DOBLOWIDTH(size)/2])
+          union(){
+	        translate([0,0,-ABIT])
     		  {
-        		cylinder(3*BLOCKHEIGHT,RI,RI,$fs=.001);
+        		cylinder(2*BLOCKHEIGHT,RI,RI,$fs=.001);
       			}
+            translate([-ABIT*5,-ABIT*21,-ABIT]) cube([ABIT*10,ABIT*42,ABIT*80]);
+            }
       	  }
         translate([0,0,9/7*BLOCKHEIGHT])
         {
