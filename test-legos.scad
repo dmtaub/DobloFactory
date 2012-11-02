@@ -7,7 +7,7 @@ doblo   (0,   0,   0,   2,   2,    4/3,  true, false, LUGO);
 *doblo   (2,   3,   0,   1,   1,    2,  true, false, DOBLO);
 *doblo   (0,   3,   0,   2,   1,    4,  true, false, LUGO);
 
-x=9;
+x=8;
 y=-47;
 
 difference(){

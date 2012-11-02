@@ -33,10 +33,6 @@ Dimensions:
 */
 
 
-// still legacy, could be a problem
-if (str(LEGO_DIV) == "undef")
-  echo ( str("ERROR: NEED TO SET LEGO_DIV to true or false" ));
-
 
 // DATA FOR QUATRO (DMT)
 // nibble outter diam: 18.45 
