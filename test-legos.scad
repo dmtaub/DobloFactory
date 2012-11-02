@@ -21,13 +21,14 @@ hinge1b(DOBLO,1,-3);
 module hinge1a(size,offx=0,offy=0){
   up = 6;
   BLOCKHEIGHT = up/6*DOBLOHEIGHT(size)/(2*size);
+  ABIT =  1/40*BLOCKHEIGHT;
   x=PART_WIDTH(size)+PART_WIDTH(size)*offx;
   y=-PART_WIDTH(size)*offy-INSET_WIDTH(size)/2;
   w=-DOBLOWALL(size);
   RI=NB_RADIUS(size)+INSET_WIDTH(size)/2; //w2.6
   RO=NB_BOTTOM_RADIUS(size); //w3.5
   RII = RO-DOBLOWALL(size)/4; //w3.2
-  echo([RI,RO, RII,1/20*BLOCKHEIGHT]);
+  echo(["A:",RI,RO, RII,ABIT]);
 
   difference(){
     union()
@@ -37,7 +38,7 @@ module hinge1a(size,offx=0,offy=0){
       {
         difference(){
           cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
-          translate([w,w-y,-1/20*BLOCKHEIGHT]) block (-.5,offy,0,.5,.5,2,false,size);
+          translate([w,w-y,-ABIT]) block (-.5,offy,0,.5,.5,2,false,size);
         }
       }
     }
@@ -59,19 +60,20 @@ module hinge1a(size,offx=0,offy=0){
 module hinge1b(size,offx=0,offy=0){
   up = 6;
   BLOCKHEIGHT = up/6*DOBLOHEIGHT(size)/(2*size);
+  ABIT =  1/40*BLOCKHEIGHT;
   x=PART_WIDTH(size)*offx;
   y=-PART_WIDTH(size)*offy-INSET_WIDTH(size)/2;
   w=-DOBLOWALL(size);
   RI=NB_RADIUS(size)/2+INSET_WIDTH(size)/2; //w2.6
   RO=NB_RADIUS(size); 
   RII = NB_BOTTOM_RADIUS(size);
-  echo([RI,RO, RII]);
+  echo(["B:",RI,RO, RII, ABIT]);
 
     union()
     {
       difference(){
         doblo   (offx,   offy,   0,   1,   2,    up,  true, false, size);
-        translate([x,y,-BLOCKHEIGHT/7]) cylinder(10/7*BLOCKHEIGHT,RII,RII,$fs=.001);
+        translate([x,y,-ABIT]) cylinder(ABIT+9/7*BLOCKHEIGHT,RII,RII,$fs=.001);
 
       }
       translate([x,y,0])
