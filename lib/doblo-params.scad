@@ -65,8 +65,8 @@ function PART_WIDTH(SCALE)  = 16.0  * SCALE;
 // Block height (a typical block is 4 * PART_HEIGHT)
 // Real Duplo Block = 19.17 / 4 = 4.8
 // we also measured 19.09, 19.16
-function PART_HEIGHT(SCALE)  = ((SCALE < 0.6) && LEGO_DIV) ? ( 3.2 * LEGO_SCALE(SCALE) ) : ( 4.8 * SCALE );
-
+//function PART_HEIGHT(SCALE)  = ((SCALE < 0.6) && LEGO_DIV) ? ( 3.2 * LEGO_SCALE(SCALE) ) : ( 4.8 * SCALE );
+function PART_HEIGHT(SCALE)  = (SCALE < 0.6) ? ( 1.6 * LEGO_SCALE(SCALE) ) : ( 3.2 * SCALE );
 // Diamonds - anti-warping holes - used optionally
 DIAMOND = 4;
 
@@ -117,6 +117,6 @@ LATTICE_TYPE    = 1;
 // Sizes of a standard 2x2 square brick, normal height
 // Not used, but are practical in your custom modules
 function DOBLOWIDTH(SCALE)  = PART_WIDTH(SCALE)  * 2.0  * SCALE;
-function DOBLOHEIGHT(SCALE) = PART_HEIGHT(SCALE) * 4.0  * SCALE;
-function LEGOHEIGHT(SCALE)  = PART_HEIGHT(SCALE) * 3.0  * SCALE; // If LEGO_DIV == true
+function DOBLOHEIGHT(SCALE) = PART_HEIGHT(SCALE) * 6.0  * SCALE;
+function LEGOHEIGHT(SCALE)  = PART_HEIGHT(SCALE) * 6.0  * SCALE; 
 
