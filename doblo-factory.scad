@@ -475,7 +475,7 @@ module house_fb (col, row, up, width,length,height, scale)
     }		
 }
 
-
+LEGO_DIV = false;
 module base_plate (col, row, up, width,length,height,nibbles_on_off, scale) 
 /* Use cases:
 - Creating an easy to print base plate for showing off your prints. I believe that buying one in a shop is more efficient ....
