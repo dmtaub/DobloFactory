@@ -51,6 +51,10 @@ DOBLO = 1;
 LUGO = 0.5;
 MINI = 0.25;
 
+HALF=3;
+THIRD=2;
+FULL=6;
+
 // LEGO SCALE - don't change, allows to create nano legos, should be 1 if real Legos
 function LEGO_SCALE(SCALE) = 2 * SCALE;
 

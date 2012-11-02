@@ -51,6 +51,10 @@ DOBLO = 1;
 LUGO = 0.5;
 MINI = 0.25;
 
+HALF=3;
+THIRD=2;
+FULL=6;
+
 // LEGO SCALE - don't change, allows to create nano legos, should be 1 if real Legos
 function LEGO_SCALE(SCALE) = 2 * SCALE;
 
@@ -91,7 +95,7 @@ function CROSS_LEN(SCALE)  = (PART_WIDTH(SCALE)-NB_RADIUS(SCALE)/2);
 // Bottom nibbles size definitions
 // Must be adjusted with respect to layer resolution and other slicing considerations
 function NB_BOTTOM_RADIUS(SCALE)        = (SCALE < 0.6) ? 6.6/2*LEGO_SCALE(SCALE) : 13.5/2*SCALE; //was 13.4
-function NB_BOTTOM_RADIUS_THIN(SCALE)        = (SCALE < 0.6) ? 3.25/2*LEGO_SCALE(SCALE) : 7.0/2*SCALE;
+function NB_BOTTOM_RADIUS_THIN(SCALE)        = (SCALE < 0.6) ? 3.2/2*LEGO_SCALE(SCALE) : 7.0/2*SCALE;
 // Real DUPLO = 13.48
 function NB_BOTTOM_RADIUS_INSIDE(SCALE) = (SCALE < 0.6) ? 4.8/2*LEGO_SCALE(SCALE) : 10.9/2*SCALE; //was 10.8
 // Real DUPLO = 10.73
@@ -100,7 +104,7 @@ function NB_BOTTOM_RADIUS_INSIDE(SCALE) = (SCALE < 0.6) ? 4.8/2*LEGO_SCALE(SCALE
 
 // walls - IMPORTANT: must be adjusted with respect to layer resolution and other slicing considerations
 
-function DOBLOWALL(SCALE) = (SCALE < 0.6) ? 1.45 * LEGO_SCALE(SCALE): 1.55 *SCALE; // Lego vs. Duplo, Lego is not 2x smaller
+function DOBLOWALL(SCALE) = (SCALE < 0.6) ? 1.42 * LEGO_SCALE(SCALE): 1.55 *SCALE; // Lego vs. Duplo, Lego is not 2x smaller
 
 function USE_INSET(SCALE) = (SCALE < 0.6) ? false : true;
 function INSET_WIDTH(SCALE)    = (SCALE < 0.6) ? 0.4 *LEGO_SCALE(SCALE) : 1.50 * SCALE; //little inset walls to make it stick

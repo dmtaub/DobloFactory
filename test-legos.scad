@@ -8,7 +8,7 @@ doblo   (2,   0,   0,   2,   2,    3,  true, false, DOBLO);
 *doblo   (0,   3,   0,   2,   1,    6,  true, false, LUGO);
 
 x=PART_WIDTH(LUGO);
-y=0;
+y=-INSET_WIDTH(LUGO);
 
 difference(){
 union()
