@@ -9,6 +9,11 @@ LEGO_DIV = false;
 
 hinge1a(LUGO,-1,-1);
 hinge1b(LUGO,1,-1);
+
+hinge1a(DOBLO,-1,-3);
+hinge1b(DOBLO,1,-3);
+
+
 //hinge1a(DOBLO,1,1);
 //hinge1a(MINI,1,1);
 
@@ -22,7 +27,7 @@ module hinge1a(size,offx=0,offy=0){
   RI=NB_RADIUS(size)+INSET_WIDTH(size)/2; //w2.6
   RO=NB_BOTTOM_RADIUS(size); //w3.5
   RII = RO-DOBLOWALL(size)/4; //w3.2
-  echo([RI,RO, RII]);
+  echo([RI,RO, RII,1/20*BLOCKHEIGHT]);
 
   difference(){
     union()
@@ -32,19 +37,19 @@ module hinge1a(size,offx=0,offy=0){
       {
         difference(){
           cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
-          translate([w,w-y,0]) block (-.5,offy,0,.5,.5,2,false,size);
+          translate([w,w-y,-1/20*BLOCKHEIGHT]) block (-.5,offy,0,.5,.5,2,false,size);
         }
       }
     }
     union()
     {   
-      translate([x,y,-DOBLOWIDTH(size)/2])
+      translate([x,y,-1/7*BLOCKHEIGHT])
       {
-        cylinder(3*BLOCKHEIGHT,RI,RI,$fs=.001);
+        cylinder(11/7*BLOCKHEIGHT,RI,RI,$fs=.001);
       }
       translate([x,y,9/7*BLOCKHEIGHT])
       {
-        cylinder(2*BLOCKHEIGHT,RII,RII,$fs=.001);
+        cylinder(31/42*BLOCKHEIGHT,RII,RII,$fs=.001);
       }
     }
   }
