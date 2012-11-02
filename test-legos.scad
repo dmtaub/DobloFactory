@@ -2,35 +2,49 @@
 include <lib/doblo-params-repl.scad>;
 
 LEGO_DIV = false;
-doblo   (0,   6,   0,   2,   2,    2,  true, false, LUGO);
-doblo   (2,   0,   0,   2,   2,    3,  true, false, DOBLO);
+*doblo   (0,   6,   0,   2,   2,    2,  true, false, LUGO);
+*doblo   (2,   0,   0,   2,   2,    3,  true, false, DOBLO);
 *doblo   (2,   3,   0,   1,   1,    3,  true, false, DOBLO);
-*doblo   (0,   3,   0,   2,   1,    6,  true, false, LUGO);
+*doblo   (0,   3,   0,   4,   1,    3,  false, false, LUGO);
 
-x=PART_WIDTH(LUGO);
-y=-INSET_WIDTH(LUGO);
+hinge1a(LUGO,-1,-1);
+hinge1a(DOBLO,1,1);
+hinge1a(MINI,1,1);
 
-difference(){
-union()
-{
-doblo   (0,   0,   0,   1,   2,    6,  true, false, LUGO);
-translate([x,y,0])
-{
 
-    cylinder(9/7*DOBLOHEIGHT(LUGO),3.5,3.5,$fs=.001);
-}
-}
+module hinge1a(size,offx=0,offy=0){
+  up = 6;
+  BLOCKHEIGHT = up/6*DOBLOHEIGHT(size)/(2*size);
+  x=PART_WIDTH(size)+PART_WIDTH(size)*offx;
+  y=-PART_WIDTH(size)*offy-INSET_WIDTH(size)/2;
+  w=-DOBLOWALL(size);
+  RI=NB_RADIUS(size)+INSET_WIDTH(size)/2; //w2.6
+  RO=NB_BOTTOM_RADIUS(size); //w3.5
+  RII = RO-DOBLOWALL(size)/4; //w3.2
+  echo([RI,RO, RII]);
 
+  difference(){
     union()
-  {   
-    translate([x,y,-4])
     {
-      cylinder(3*DOBLOHEIGHT(LUGO),2.6,2.6,$fs=.001);
+      doblo   (offx,   offy,   0,   1,   2,    up,  true, false, size);
+      translate([x,y,0])
+      {
+        difference(){
+          cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
+          #translate([w,w-y,0]) block (-.5,offy,0,.5,.5,2,false,size);
+        }
+      }
     }
-  translate([x,y,6])
-  {
-    cylinder(5/7*DOBLOHEIGHT(LUGO),3.2,3.2,$fs=.001);
-  }
-}
+    union()
+    {   
+      translate([x,y,-DOBLOWIDTH(size)/2])
+      {
+        cylinder(3*BLOCKHEIGHT,RI,RI,$fs=.001);
+      }
+      translate([x,y,9/7*BLOCKHEIGHT])
+      {
+        #cylinder(2*BLOCKHEIGHT,RII,RII,$fs=.001);
+      }
+    }
   }
 }
