@@ -5,11 +5,6 @@ sept. 2012
 modified as an extension to doblo-factory v2.0 by dmtaub@cemi.org
 */
 
-// setting LEGO_DIV to true will make Lego models higher, i.e. height units will be use "Lego heights" 3.2mm instead of the 2.4mm/4.8mm Duplo proportions. This param will not affect DUPLOs (scale > 0.6)
-
-LEGO_DIV = true;     // height units = 3.2mm, use for true Lego height divisions
-// LEGO_DIV = false; // height units = 2.4mm. 
-
 // LOAD doblo factory
 include <doblo-factory.scad>;
 // LOAD castle kit extension

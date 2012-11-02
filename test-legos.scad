@@ -2,18 +2,18 @@
 include <lib/doblo-params-repl.scad>;
 
 LEGO_DIV = false;
-doblo   (0,   0,   0,   2,   2,    2,  true, false, LUGO);
-*doblo   (2,   0,   0,   2,   2,    3,  true, false, DOBLO);
+doblo   (0,   6,   0,   2,   2,    2,  true, false, LUGO);
+doblo   (2,   0,   0,   2,   2,    3,  true, false, DOBLO);
 *doblo   (2,   3,   0,   1,   1,    3,  true, false, DOBLO);
 *doblo   (0,   3,   0,   2,   1,    6,  true, false, LUGO);
 
-x=8;
-y=-47;
+x=PART_WIDTH(LUGO);
+y=0;
 
 difference(){
 union()
 {
-doblo   (0,   6,   0,   1,   2,    6,  true, false, LUGO);
+doblo   (0,   0,   0,   1,   2,    6,  true, false, LUGO);
 translate([x,y,0])
 {
 
