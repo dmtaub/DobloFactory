@@ -7,15 +7,21 @@ LEGO_DIV = false;
 *doblo   (2,   3,   0,   1,   1,    3,  true, false, DOBLO);
 *doblo   (0,   3,   0,   4,   1,    3,  false, false, LUGO);
 
-hinge1a(LUGO,-1,-1);
-hinge1b(LUGO,1,-1);
-
-hinge1a(DOBLO,-1,-3);
-hinge1b(DOBLO,1,-3);
+//hinge1a(LUGO,-1,-1);
+//hinge1b(LUGO,1,-1);
+//hinge1a(DOBLO,-1,-3);
+//hinge1b(DOBLO,1,-3);
 
 
 //hinge1a(DOBLO,1,1);
 //hinge1a(MINI,1,1);
+
+
+hinge2(DOBLO,2,3,0);
+hinge2(DOBLO,2,3,1,4);
+
+hinge2(LUGO,3,3,0,20);
+hinge2(LUGO,3,3,1,16);
 
 
 module hinge1a(size,offx=0,offy=0){
@@ -93,11 +99,29 @@ module hinge1b(size,offx=0,offy=0){
           cylinder(5/7*BLOCKHEIGHT,RII,RII,$fs=.001);
         }
       }
-
       }
-
-
     }
-
 }
 
+
+include <hinge.scad>;
+module hinge2(size=DOBLO, len=2, up = 3,sep = 1,yax=0){
+  BLOCKWIDTH=DOBLOWIDTH(size)/2/size;
+  sepr = BLOCKWIDTH *sep;
+  BLOCKHEIGHT = up/6*DOBLOHEIGHT(size)/(2*size);  
+  ABIT =  1/40*BLOCKHEIGHT;
+  scale = .388*BLOCKWIDTH;
+
+  translate([sepr,0,0])
+  union(){
+    doblo   (0,   yax,   0,   len,   2,    up,  true, false, size);
+    rotate([90,0,0]) translate([-BLOCKWIDTH/2,.8*scale,yax*BLOCKWIDTH]) hinge(1,scale);
+  }
+
+  union(){
+    doblo   (-1-len,   yax,   0,   len,   2,    up,  true, false, size);
+    rotate([90,180,0]) translate([BLOCKWIDTH/2,-.8*scale,yax*BLOCKWIDTH]) hinge(0,scale);
+  }
+
+
+}
