@@ -94,13 +94,13 @@ module hinge2(xoff, yoff, zoff,length,width,up=3,sep = 1,nibbles=true,size=DOBLO
 
     union(){
       doblo   (xoff,   yoff,   zoff,   length,   width,    up,  nibbles, false, size);
-      //hinge_a (xoff, yoff, zoff, width,length, up, BLOCKWIDTH, BLOCKHEIGHT);
-      rotate([90,180,0]) translate([(xoff+length+.5)*-BLOCKWIDTH,(zoff-1)*-BLOCKHEIGHT-.8*scale,yoff*BLOCKWIDTH]) hinge(0,scale);
+      hinge_a (xoff, yoff, zoff, width,length, up, BLOCKWIDTH, BLOCKHEIGHT);
+      //rotate([90,180,0]) translate([(xoff+length+.5)*-BLOCKWIDTH,(zoff-1)*-BLOCKHEIGHT-.8*scale,yoff*BLOCKWIDTH]) hinge(0,scale);
     }
   translate([sepr,0,0])
   union(){
     doblo   (length+xoff,   yoff,   zoff,   length,   width,    up,  nibbles, false, size);
-      rotate([90,0,0]) translate([(xoff+length-.5)*BLOCKWIDTH,(zoff-1)*BLOCKHEIGHT+.8*scale,yoff*BLOCKWIDTH]) hinge(1,scale);
+      //rotate([90,0,0]) translate([(xoff+length-.5)*BLOCKWIDTH,(zoff-1)*BLOCKHEIGHT+.8*scale,yoff*BLOCKWIDTH]) hinge(1,scale);
   }
 
 
@@ -111,10 +111,10 @@ module hinge_a (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
 {
 h_len = BLOCKWIDTH/4;
 rad_i = .776;
-rad_o = .776*4;
+rad_o = BLOCKHEIGHT/2;
 if (width > 1){
   for(i=[1:width])
-   translate([(xoff+length)*BLOCKWIDTH,(-yoff-width)*BLOCKWIDTH+h_len*i*4,rad_o*2]) rotate([90,0,0]) cylinder(r=rad_o,h=h_len*2);
+   translate([(xoff+length+.5)*BLOCKWIDTH,(-yoff-width)*BLOCKWIDTH+h_len*i*4,zoff/3*BLOCKHEIGHT+rad_o]) rotate([90,0,0]) cylinder(r=rad_o,h=h_len*2);
 
 }
 

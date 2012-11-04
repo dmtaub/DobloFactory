@@ -25,8 +25,8 @@ include <ext/hinge.scad>;
 //hinge2(3,3,0,20,true,LUGO);
 //hinge2(3,3,1,16,false,LUGO);
 
-hinge2   (0,  3,  2,   2,  2, 6,sep=1, size=LUGO);
+hinge2   (0,  3,  0,   2,  2, 6,sep=1, size=LUGO);
 
-//hinge2   (0,  6,  2,   2,  4, 3,sep=1, size=LUGO);
+hinge2   (0,  6,  2,   2,  4, 3,sep=1, size=LUGO);
 
 
