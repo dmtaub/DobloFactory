@@ -31,3 +31,5 @@ rotate([0,0,180])hinge2   (-6,  -5,  0,   2,  2, 3, true, DOBLO);
 hinge2   (0,  3,  0,   2,  2, 3, true, LUGO);
 rotate([0,0,180])hinge2   (-6,  -5,  0,   2,  2, 3, true, LUGO);
 
+//hinge2   (20,  3,  0,   4,  4, 3, true, LUGO);
+//rotate([0,0,180])hinge2   (-30,  -7,  0,  4,  4, 3, true, LUGO);
