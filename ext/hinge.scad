@@ -124,7 +124,7 @@ module hinge_a (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
         else {
           union(){
             hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
-            translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i*9/10);
+            translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i*8/10);
           }
         }
       } //end translate
