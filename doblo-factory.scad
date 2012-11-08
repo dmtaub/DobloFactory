@@ -23,7 +23,7 @@ include <lib/doblo-params.scad>;
 // Import an STL and place it.
 // Only tested with DUPLOS !!
 
-module merge_stl (file, col, row, up, stl_z_offset_mm, scale) {
+module merge_stl (file, col, row, up, stl_z_offset_mm, scale,shrink = 1) {
     
     // Move STOL right and forward - origin is x=leftmost and y=backmost
     x_offset_mm       =  col * PART_WIDTH(scale) + PART_WIDTH(scale) ;
@@ -32,7 +32,7 @@ module merge_stl (file, col, row, up, stl_z_offset_mm, scale) {
     // the STL
     translate([x_offset_mm, y_offset_mm, z_offset_mm])
 	{
-	    import(file);
+	    scale(1/shrink) import(file);
 	}
 }
 

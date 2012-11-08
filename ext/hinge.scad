@@ -94,15 +94,7 @@ module hinge2(xoff, yoff, zoff,length,width,up=3,nibbles=true,size=DOBLO ){
     union(){
       doblo   (xoff,   yoff,   zoff,   length,   width,    up,  nibbles, false, size);
       hinge_a (xoff, yoff, zoff, width,length, up, BLOCKWIDTH, BLOCKHEIGHT);
-      //rotate([90,180,0]) translate([(xoff+length+.5)*-BLOCKWIDTH,(zoff-1)*-BLOCKHEIGHT-.8*scale,yoff*BLOCKWIDTH]) hinge(0,scale);
     }
-  //translate([sepr,0,0])
-  //union(){
-    //doblo   (length+xoff,   yoff,   zoff,   length,   width,    up,  nibbles, false, size);
-      //rotate([90,0,0]) translate([(xoff+length-.5)*BLOCKWIDTH,(zoff-1)*BLOCKHEIGHT+.8*scale,yoff*BLOCKWIDTH]) hinge(1,scale);
-  //}
-
-
 }
 
 
@@ -118,13 +110,15 @@ module hinge_a (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
         if ( (i%2) == 0) {
           difference(){
             hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
-            translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i);
+            //#translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i);
+            translate([.5*BLOCKWIDTH,2*h_len+clip,rad_o])rotate([90,0,0])cylinder(h=h_len*2+clip,r=rad_i);
           }
         }
         else {
           union(){
             hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
-            translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i*8/10);
+            //translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i*8/10);
+            translate([.5*BLOCKWIDTH,2*clip,rad_o])sphere(r=rad_i);
           }
         }
       } //end translate
