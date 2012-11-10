@@ -101,7 +101,7 @@ module hinge2(xoff, yoff, zoff,length,width,up=3,nibbles=true,size=DOBLO ){
 module hinge_a (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
 {
   h_len = BLOCKWIDTH/4;
-  clip = h_len /8;
+  clip = h_len /10;
   rad_i = h_len/2;
   rad_o = BLOCKHEIGHT/2;
   if (width > 1){
