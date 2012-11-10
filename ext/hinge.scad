@@ -101,7 +101,7 @@ module hinge2(xoff, yoff, zoff,length,width,up=3,nibbles=true,size=DOBLO ){
 module hinge_a (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
 {
   h_len = BLOCKWIDTH/4;
-  clip = h_len /10;
+  clip = h_len /8;
   rad_i = h_len/2;
   rad_o = BLOCKHEIGHT/2;
   if (width > 1){
@@ -111,14 +111,14 @@ module hinge_a (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
           difference(){
             hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
             //#translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i);
-            translate([.5*BLOCKWIDTH,2*h_len+clip,rad_o])rotate([90,0,0])cylinder(h=h_len*2+clip,r=rad_i);
+            translate([.5*BLOCKWIDTH,2*h_len+clip,rad_o])rotate([90,0,0])cylinder(h=h_len*2+clip,r=rad_i*1.2);
           }
         }
         else {
           union(){
             hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
             //translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i*8/10);
-            translate([.5*BLOCKWIDTH,2*clip,rad_o])sphere(r=rad_i);
+            translate([.5*BLOCKWIDTH,1.5*rad_i+clip,rad_o])sphere(r=2*rad_i);
           }
         }
       } //end translate
@@ -159,7 +159,7 @@ module model(right,len){
     union(){
       for(i=[1,3]){
         translate([0,0,1.05*i])sphere(r=.13);
-        translate([0,0,.95+1.05*i])sphere(r=.13);
+        translate([0,0,.95+1.05*i])sphere(r=.13,$fs=.001);
 
       }
       union(){
