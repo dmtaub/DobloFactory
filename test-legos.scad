@@ -2,15 +2,20 @@ include <doblo-factory.scad>;
 include <lib/doblo-params-repl.scad>;
 
 include <vendor/pins/buser_pins.scad>;
-
-
-translate([20,10,0]) union(){
+rotate([0,0,90])translate([-30,-25,0]) union(){
 translate([-5,-20])cube([10,40,3]);
 translate([0,-20])cylinder(h=3,r=5);
 translate([0,20])cylinder(h=3,r=5);
 pintack(h=7,r=3);
 }
 
+/*
+include <vendor/ballsocket/ballsocket.scad>;
+translate([0,0,5])union(){
+  rotate([0,90,0])ball(size=5);
+  translate([10,0,0])rotate([0,90,0])rotate([0,0,90])joint(size=5);
+}
+*/
 LEGO_DIV = false;
 *doblo   (0,   6,   0,   2,   2,    2,  true, false, LUGO);
 *doblo   (2,   0,   0,   2,   2,    3,  true, false, DOBLO);

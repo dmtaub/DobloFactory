@@ -3,7 +3,7 @@
 
 //render settings
 
-module ball(size=11){
+module ball(size=10.5){
   $fs=0.8; // def 1, 0.2 is high res
   $fa=4;//def 12, 3 is very nice
 	sphere(r=size);
@@ -21,7 +21,7 @@ module ball(size=11){
 module joint(size=10.5,joint_spacing=0, joint_arms=2)
   {
   joint_thickness = size/3;
-  arm_width = 2*size+joint_thickness;
+  arm_width = size;
   $fs=0.8; // def 1, 0.2 is high res
   $fa=4;//def 12, 3 is very nice
     difference()
@@ -31,9 +31,11 @@ module joint(size=10.5,joint_spacing=0, joint_arms=2)
       translate([0,0,-size]) cube([(size+joint_thickness+joint_spacing)*2,(size+joint_spacing+joint_thickness)*2,size+joint_thickness],center=true);
       for(i=[0:joint_arms])
       {
-        #rotate([0,0,360/joint_arms*i]) translate([-arm_width/2,size*.90, -size])
-          cube([arm_width,size,(size+joint_thickness)*2]);
+        rotate([0,0,360/joint_arms*i]) translate([-size*3/2,size, -size/2])
+           cube([size*3,size,size+joint_thickness]);
+        rotate([0,0,360/joint_arms*i]) translate([-arm_width/2,size/2, -size/2])
+           cube([arm_width,size,size]);
       }
     }
-    translate([0,0,size-0]) cylinder(r2=size,r1=size,h=size/2);
+    translate([0,0,size-0]) cylinder(r2=size,r1=size,h=arm_width);
   }
