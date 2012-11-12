@@ -4,7 +4,7 @@
 //render settings
 
 module ball(size=10.5,postfraction=1.5){
-  $fs=0.8; // def 1, 0.2 is high res
+  $fs=0.6; // def 1, 0.2 is high res
   $fa=4;//def 12, 3 is very nice
 	sphere(r=size);
 	translate([0,0,-size]) cylinder(r1=size/postfraction,r2=size/2,h=size/postfraction);
@@ -21,11 +21,11 @@ module ball(size=10.5,postfraction=1.5){
 module joint(size=10.5, joint_arms=2)
   {  
 
-  joint_spacing=size/50;
+  joint_spacing=size/40;
   joint_thickness = size/3;
   arm_width = size*2/3;
   o = size/50;
-  cutsize=size;
+  cutsize=size*6/5;
   $fs=0.8; // def 1, 0.2 is high res
   $fa=4;//def 12, 3 is very nice
     difference()
