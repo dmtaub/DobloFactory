@@ -1,7 +1,63 @@
-// based in part on a hinge by irts
-// http://www.thingiverse.com/thing:14833
-// modified by Dan Taub 2012-11-01
+/* Connectors Library for DobloFactory
 
+ Daniel Taub (dan@cemi.org) November 2012
+
+ includes:
+   hinge_y - rotates about y
+   hinge_z - rotates about z
+   ball joint
+*/
+
+module hinge_y(xoff, yoff, zoff,length,width,up=3,nibbles=true,size=DOBLO, $fs=0.01){
+  BLOCKWIDTH=DOBLOWIDTH(size)/2/size;
+  //sepr = BLOCKWIDTH *(sep);
+  BLOCKHEIGHT = DOBLOHEIGHT(size)/(2*size);  
+  ABIT =  1/40*BLOCKHEIGHT;
+  //scale = .388*BLOCKWIDTH;
+  echo([BLOCKWIDTH, BLOCKHEIGHT]);
+
+    union(){
+      doblo   (xoff,   yoff,   zoff,   length,   width,    up,  nibbles, false, size);
+      hinge_a (xoff, yoff, zoff, width,length, up, BLOCKWIDTH, BLOCKHEIGHT);
+    }
+}
+
+
+module hinge_a (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
+{
+  h_len = BLOCKWIDTH/4;
+  clip = h_len /10;
+  rad_i = h_len/2;
+  rad_o = BLOCKHEIGHT/2;
+  if (width > 1){
+    for(i=[1:width]){
+      translate([(xoff+length)*BLOCKWIDTH,-clip/2+(-yoff-width)*BLOCKWIDTH+h_len*2*(i*2-1),(zoff/3)*BLOCKHEIGHT]) {
+        if ( (i%2) == 0) {
+          difference(){
+            hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
+            //#translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i);
+            translate([.5*BLOCKWIDTH,2*h_len+clip,rad_o])rotate([90,0,0])cylinder(h=h_len*2+clip,r=rad_i*1.2);
+          }
+        }
+        else {
+          union(){
+            hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
+            //translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i*8/10);
+            translate([.5*BLOCKWIDTH,1.5*rad_i+clip,rad_o])sphere(r=2*rad_i);
+          }
+        }
+      } //end translate
+    } // end for
+  } //end if
+} //end module
+
+
+module hinge_arm(BLOCKWIDTH,h_len,rad_o,clip){
+   union(){
+     translate([0,clip,0]) cube([BLOCKWIDTH/2,h_len*2-clip,rad_o*2]);
+     translate([.5*BLOCKWIDTH,h_len*2,rad_o]) rotate([90,0,0]) cylinder(r=rad_o,h=h_len*2-clip);
+   }
+}
 
 module hinge1a(size,offx=0,offy=0){
   up = 6;
@@ -83,22 +139,7 @@ module hinge1b(size,offx=0,offy=0){
 }
 
 
-module hinge2(xoff, yoff, zoff,length,width,up=3,nibbles=true,size=DOBLO ){
-  BLOCKWIDTH=DOBLOWIDTH(size)/2/size;
-  //sepr = BLOCKWIDTH *(sep);
-  BLOCKHEIGHT = DOBLOHEIGHT(size)/(2*size);  
-  ABIT =  1/40*BLOCKHEIGHT;
-  //scale = .388*BLOCKWIDTH;
-  echo([BLOCKWIDTH, BLOCKHEIGHT]);
-
-    union(){
-      doblo   (xoff,   yoff,   zoff,   length,   width,    up,  nibbles, false, size);
-      hinge_a (xoff, yoff, zoff, width,length, up, BLOCKWIDTH, BLOCKHEIGHT);
-    }
-}
-
-
-module hinge_a (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
+module hinge_z (xoff, yoff, zoff, width,length,up, BLOCKWIDTH, BLOCKHEIGHT)
 {
   h_len = BLOCKWIDTH/4;
   clip = h_len /10;
@@ -133,54 +174,4 @@ module hinge_arm(BLOCKWIDTH,h_len,rad_o,clip){
      translate([.5*BLOCKWIDTH,h_len*2,rad_o]) rotate([90,0,0]) cylinder(r=rad_o,h=h_len*2-clip);
    }
 }
-
-$fs=.01;
-module model(right,len){
-  if(right==1){
-
-
-    difference(){
-      union(){
-        intersection(){
-          cylinder(r=.8,h=8);
-          for(i=[0,2,4]){
-            translate([0,0,1.05*i])cylinder(r=.8,h=.95);
-          }//end for
-        }//end union
-        for(i=[0,2,4]){
-          translate([0,-.4,1.05*i])cube([len,.8,.95]);
-        }//end for
-      }//end intersection
-      cylinder(r=.2,h=8.5);
-    }//end difference
-  }//end if
-  else{
-
-    union(){
-      for(i=[1,3]){
-        translate([0,0,1.05*i])sphere(r=.13);
-        translate([0,0,.95+1.05*i])sphere(r=.13,$fs=.001);
-
-      }
-      union(){
-        intersection(){
-          cylinder(r=.8,h=8);
-          for(i=[1,3]){
-            #translate([0,0,1.05*i])cylinder(r=.8,h=.95);
-          }
-        }
-        for(i=[1,3]){
-          translate([0,-.4,1.05*i])cube([len,.8,.95]);
-        }//end for     
-      }//end union
-
-    } // end union
-  }//end else
-}//end module
-
-module hinge(right,size=1/8,len=1.5){
-  scale([size,size,size])model(right,len);
-}
-
-
 
