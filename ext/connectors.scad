@@ -188,15 +188,30 @@ module ball_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=true,size=DOBLO
   x_1 = xoff    * PART_WIDTH(size)  + width  * PART_WIDTH(size);
   x_2=x_1+PART_WIDTH(size)/2;
   y_0 = - (yoff * PART_WIDTH(size) + length * PART_WIDTH(size) / 2.0) ;
-  //z_0 = zoff      * PART_HEIGHT(size)  + height * PART_HEIGHT(size) / 2.0;
+  z_0 = zoff      * PART_HEIGHT(size);
 
   union(){
     doblo   (xoff, yoff, zoff, width,length, height, nibbles, false, size);
-    #translate([x_2,y_0,5*size]) rotate([0,90,0])ball(size=5*size);
+    #translate([x_2,y_0,z_0+5*size]) rotate([0,90,0])ball(size=5*size);
   }
 }
-module socket_doblo(xoff, yoff, zoff,length,width,height=3,nibbles=true,size=DOBLO){
+module socket_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=true,size=DOBLO){
+
+
+  x_1 = xoff    * PART_WIDTH(size);
+  x_2=x_1-PART_WIDTH(size)/2;
+  y_0 = - (yoff * PART_WIDTH(size) + length * PART_WIDTH(size) / 2.0) ;
+  z_0 = zoff      * PART_HEIGHT(size);
+
+  union(){
+    doblo   (xoff, yoff, zoff, width,length, height, nibbles, false, size);
+    #translate([x_2,y_0,z_0+5*size])rotate([0,90,0])rotate([0,0,90])joint(size=5*size, frontchop=1.2);
+
+  }
 }
+
+
+
 module ball(size=10.5,postfraction=1.5){
   $fs=1; // def 1, 0.2 is high res
   $fa=4;//def 12, 3 is very nice

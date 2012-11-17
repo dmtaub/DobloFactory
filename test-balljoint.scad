@@ -24,7 +24,16 @@ translate([-10,0,0]) union(){
 
 */
 ball_doblo   (4,   1,   0,   2,   2,size=LUGO);
-#ball_doblo   (2,   2,   0,   2,   1,size=DOBLO);
+ball_doblo   (2,   2,   0,   3,   1,size=DOBLO);
 ball_doblo   (2,   4,   0,   1,   1,size=DOBLO);
-ball_doblo   (4,   6,   0,   2,   2,size=DOBLO);
+ball_doblo   (4,   6,   0,   3,   2,size=DOBLO);
+
+
+socket_doblo   (8,   1,   0,   2,   2,size=LUGO);
+socket_doblo   (6,   2,   0,   3,   1,size=DOBLO);
+socket_doblo   (6,   4,   0,   1,   1,size=DOBLO);
+socket_doblo   (8,   6,   0,   3,   2,size=DOBLO);
+
+
+
 
