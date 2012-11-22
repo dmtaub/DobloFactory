@@ -1,4 +1,29 @@
 
+// --------------- modules made out of our elementary bricks ---------------------------------
+
+// Pillars - not done yet !!
+
+module pillar_lr (scale)
+{
+    translate ([0,0,0]) {
+	difference () {
+	    rotate (a=90, v=[1,0,0]) {
+		scale (v=[1,1.6,1]) {
+		    difference () {
+			cylinder(h = DOBLOHEIGHT(scale), r=PART_WIDTH(scale), $fs = 0.2);
+			# translate ([NO(scale),0,-1]) {
+			    cylinder(h = DOBLOHEIGHT(scale)+2, r=PART_WIDTH(scale), $fs = 0.2);
+			}
+		    }
+		}
+	    }
+	    # translate ([-DOBLOHEIGHT(scale),-DOBLOHEIGHT(scale)-NO(scale),- 2* DOBLOHEIGHT(scale)]) {
+		cube ([DOBLOHEIGHT(scale)*2, DOBLOHEIGHT(scale)*2, DOBLOHEIGHT(scale)*2]);
+	    }
+	}
+    }
+}
+
 module doblo_light (col, row, up, width,length,height,nibbles_on_off,scale) 
 /* Use cases:
 A more light-weight blocks with just walls underneath, e.g. ok for pieces of a game that don't really need to stick so well
