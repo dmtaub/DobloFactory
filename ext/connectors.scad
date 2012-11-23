@@ -183,7 +183,7 @@ derived originally from Erik's parametric ball joint:
 http://www.thingiverse.com/thing:1968
 */
 
-module ball_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=true,size=DOBLO){
+module ball_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=true,diamonds=false,size=DOBLO){
   
   x_1 = xoff    * PART_WIDTH(size)  + width  * PART_WIDTH(size);
   x_2=x_1+PART_WIDTH(size)/2;
@@ -191,11 +191,11 @@ module ball_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=true,size=DOBLO
   z_0 = zoff      * PART_HEIGHT(size);
 
   union(){
-    doblo   (xoff, yoff, zoff, width,length, height, nibbles, false, size);
+    doblo   (xoff, yoff, zoff, width,length, height, nibbles, diamonds, size);
     translate([x_2,y_0,z_0+5*size]) rotate([0,90,0])ball(size=5*size);
   }
 }
-module socket_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=true,size=DOBLO){
+module socket_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=true,diamonds=false,size=DOBLO){
 
 
   x_1 = xoff    * PART_WIDTH(size);
@@ -204,7 +204,7 @@ module socket_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=true,size=DOB
   z_0 = zoff      * PART_HEIGHT(size);
 
   union(){
-    doblo   (xoff, yoff, zoff, width,length, height, nibbles, false, size);
+    doblo   (xoff, yoff, zoff, width,length, height, nibbles, diamonds, size);
     translate([x_2,y_0,z_0+5*size])rotate([0,90,0])rotate([0,0,90])joint(size=5*size, frontchop=1.2);
 
   }
@@ -257,14 +257,14 @@ module joint(size=10.5, joint_arms=2,frontchop=1,spacingdiv=40)
   }
 
 
-module top_ball_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=false,size=DOBLO){
+module top_ball_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=false,diamonds=false,size=DOBLO){
   
   x_1 = xoff    * PART_WIDTH(size)  + width  * PART_WIDTH(size)/2;
   y_0 = - (yoff * PART_WIDTH(size) + length * PART_WIDTH(size) / 2.0) ;
   z_0 = zoff      * PART_HEIGHT(size)+height*PART_HEIGHT(size);
 
   union(){
-    doblo   (xoff, yoff, zoff, width,length, height, nibbles, false, size);
+    doblo   (xoff, yoff, zoff, width,length, height, nibbles, diamonds, size);
     translate([x_1,y_0,z_0+1.5*5*size]) rotate([0,0,0])ball(size=5*size);
   }
 }
