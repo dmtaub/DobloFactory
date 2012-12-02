@@ -53,9 +53,6 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
   y_0 = - (row * PART_WIDTH(scale) + length * PART_WIDTH(scale) / 2.0) ;
   z_0 = up      * PART_HEIGHT(scale)  + height * PART_HEIGHT(scale) / 2.0;
 
-  //N_insets_col = length /2 ;
-  //N_insets_row   = width /2;
-
   // User info
   echo(str("DOBLO brick width(x)=", width * PART_WIDTH(scale), "mm, length=", length*PART_WIDTH(scale), "mm, height=", height*PART_HEIGHT(scale), "mm" ));
   // the cube is drawn at absolute x,y,z = 0 then moved
