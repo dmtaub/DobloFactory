@@ -53,8 +53,8 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
   y_0 = - (row * PART_WIDTH(scale) + length * PART_WIDTH(scale) / 2.0) ;
   z_0 = up      * PART_HEIGHT(scale)  + height * PART_HEIGHT(scale) / 2.0;
 
-  N_insets_col = length /2 ;
-  N_insets_row   = width /2;
+  //N_insets_col = length /2 ;
+  //N_insets_row   = width /2;
 
   // User info
   echo(str("DOBLO brick width(x)=", width * PART_WIDTH(scale), "mm, length=", length*PART_WIDTH(scale), "mm, height=", height*PART_HEIGHT(scale), "mm" ));
@@ -123,16 +123,10 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
         {
           union()
           {
-            for(j=[1:N_insets_col])
-            {	
-              for (i = [1:N_insets_row])
-              {
-                translate([0,j*NO(scale)+(j-1)*NO(scale),0 ])   cube([width*PART_WIDTH(scale), INSET_WIDTH(scale),           height*PART_HEIGHT(scale)],true);
-                translate([0,j*-NO(scale)+(j-1)*-NO(scale),0 ]) cube([width*PART_WIDTH(scale), INSET_WIDTH(scale),            height*PART_HEIGHT(scale)],true);
-                translate([i*NO(scale)+(i-1)*NO(scale),0,0 ])   cube([INSET_WIDTH(scale),          length*PART_WIDTH(scale), height*PART_HEIGHT(scale)],true);
-                translate([i*-NO(scale)+(i-1)*-NO(scale),0,0 ]) cube([INSET_WIDTH(scale),          length*PART_WIDTH(scale), height*PART_HEIGHT(scale)],true);	
-              }
-            }
+            for(j=[1:length])
+                translate([0,-PART_WIDTH(scale)*length/2+j*2*NO(scale)-2*NO(scale)/2,0]) cube([width*PART_WIDTH(scale), INSET_WIDTH(scale), height*PART_HEIGHT(scale)],true);
+            for (i = [1:width])
+                translate([-PART_WIDTH(scale)*width/2+i*2*NO(scale)-2*NO(scale)/2,00]) cube([INSET_WIDTH(scale), length*PART_WIDTH(scale), height*PART_HEIGHT(scale)],true);
           }
           cube([width*PART_WIDTH(scale)-INSET_LENGTH(scale), length*PART_WIDTH(scale)-INSET_LENGTH(scale), height*PART_HEIGHT(scale)+2], true);
         }
