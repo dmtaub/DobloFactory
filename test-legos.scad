@@ -1,15 +1,6 @@
-include <doblo-factory.scad>;
+	include <doblo-factory.scad>;
 include <lib/doblo-params-repl.scad>;
 include <ext/connectors.scad>;
-
-
-include <vendor/pins/buser_pins.scad>;
-rotate([0,0,90])translate([-30,-25,0]) union(){
-translate([-5,-20])cube([10,40,3]);
-translate([0,-20])cylinder(h=3,r=5);
-translate([0,20])cylinder(h=3,r=5);
-pintack(h=7,r=3);
-}
 
 LEGO_DIV = false;
 *doblo   (0,   6,   0,   2,   2,    2,  true, false, LUGO);
@@ -23,8 +14,8 @@ LEGO_DIV = false;
 //hinge2(3,3,0,20,true,LUGO);
 //hinge2(3,3,1,16,false,LUGO);
 
-hinge_y   (0,  3,  0,   1,  2, 3, true, DOBLO);
-hinge_y  (2,  3,  0,   1,  2, 3, true, DOBLO);
+//hinge_y   (0,  3,  0,   1,  2, 3, true, DOBLO);
+//hinge_y  (2,  3,  0,   1,  2, 3, true, DOBLO);
 
 //hinge2   (0,  3,  0,   2,  2, 3, true, LUGO);
 //rotate([0,0,180])hinge2   (-6,  -5,  0,   2,  2, 3, true, LUGO);
@@ -33,5 +24,10 @@ hinge_y  (2,  3,  0,   1,  2, 3, true, DOBLO);
 //rotate([0,0,180])hinge2   (-30,  -7,  0,  4,  4, 3, true, LUGO);
 
 
-hinge1b(DOBLO,1,-2);
-hinge1a(DOBLO,3,-2);
+hinge1b(DOBLO,1,1);
+hinge1a(DOBLO,3,1);
+
+hinge1b(LUGO,1,-3);
+hinge1a(LUGO,3,-3);
+
+pin_prop();

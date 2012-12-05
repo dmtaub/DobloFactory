@@ -80,7 +80,7 @@ SCALE =0.5;   // Lego size (same as SCALE = LUGO;)
 
 // --------------- simple bricks and tests -------------
 
-// house_lr   (-5, -1,  0,  10,    4,     10, SCALE) ;
-// house_fb   (-5, -1,  0,  4,    10,     10, SCALE) ;
-// doblo   (0,   0,   0,   4,   2,    3,  false, false, SCALE );	
-// doblo   (0,   0,   0,   2,   2,    2,  false, false, SCALE );	
+// house_lr   (-5, -1,  0,  10,    4,     2*FULL+HALF, SCALE) ;
+// house_fb   (-5, -1,  0,  4,    10,     2*FULL+HALF, SCALE) ;
+// doblo   (0,   0,   0,   4,   2,    FULL,  false, false, SCALE );	
+// doblo   (0,   0,   0,   2,   2,    FULL,  false, false, SCALE );	

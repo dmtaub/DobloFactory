@@ -7,6 +7,7 @@
    hinge_z - rotates about z
    ball joint
 */
+include <../vendor/pins/buser_pins.scad>;
 
 module hinge_y(xoff, yoff, zoff,length,width,height=3,nibbles=true,size=DOBLO, $fs=0.01){
   BLOCKWIDTH=DOBLOWIDTH(size)/2/size;
@@ -67,9 +68,10 @@ module hinge1a(size,offx=0,offy=0){
   y=-PART_WIDTH(size)*offy-INSET_WIDTH(size)/2;
   w=-DOBLOWALL(size);
   RI=NB_RADIUS(size)+INSET_WIDTH(size)/2; //w2.6
+  hei = 9/7*BLOCKHEIGHT;
   RO=NB_BOTTOM_RADIUS(size); //w3.5
-  RII = RO-DOBLOWALL(size)/4; //w3.2
-  echo(["A:",RI,RO, RII,ABIT]);
+  RII = RO-DOBLOWALL(size)/5; //w3.2
+  echo(["xA:",RI,RO, RII,ABIT,9/7*BLOCKHEIGHT]);
 
   difference(){
     union()
@@ -87,7 +89,8 @@ module hinge1a(size,offx=0,offy=0){
     {   
       translate([x,y,-1/7*BLOCKHEIGHT])
       {
-        cylinder(11/7*BLOCKHEIGHT,RI,RI,$fs=.001);
+        translate([0,0,hei+1/7*BLOCKHEIGHT])rotate([0,180,0])pinhole(h=hei,r=NB_RADIUS(size));
+        //cylinder(11/7*BLOCKHEIGHT,RI,RI,$fs=.01);
       }
       translate([x,y,9/7*BLOCKHEIGHT])
       {
@@ -108,6 +111,7 @@ module hinge1b(size,offx=0,offy=0){
   RI=NB_RADIUS(size)/2+INSET_WIDTH(size)/2; //w2.6
   RO=NB_RADIUS(size); 
   RII = NB_BOTTOM_RADIUS(size);
+  hei = BLOCKHEIGHT*9/7;
   echo(["B:",RI,RO, RII, ABIT]);
 
   union()
@@ -117,23 +121,11 @@ module hinge1b(size,offx=0,offy=0){
       translate([x,y,-ABIT]) cylinder(ABIT+9/7*BLOCKHEIGHT,RII,RII,$fs=.001);
 
     }
-    translate([x,y,0])
-    {  union(){
-                difference(){
-                  cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
-                  union(){
-                    translate([0,0,-ABIT])
-                    {
-                      cylinder(2*BLOCKHEIGHT,RI,RI,$fs=.001);
-                    }
-                    translate([-ABIT*5,-ABIT*21,-ABIT]) cube([ABIT*10,ABIT*42,ABIT*80]);
-                  }
-                }
-                translate([0,0,9/7*BLOCKHEIGHT])
-                {
-                  cylinder(5/7*BLOCKHEIGHT,RII,RII,$fs=.001);
-                }
-              }
+    translate([x,y,0]) {  
+      union(){
+        translate([0,0,hei]) rotate([180,0,0])pin(r=RO,h=hei);
+        translate([0,0,9/7*BLOCKHEIGHT]) cylinder(5/7*BLOCKHEIGHT,2*RI,2*RI,$fs=.01);
+      }
     }
   }
 }
@@ -266,5 +258,15 @@ module top_ball_doblo(xoff, yoff, zoff,width,length,height=3,nibbles=false,diamo
   union(){
     doblo   (xoff, yoff, zoff, width,length, height, nibbles, diamonds, size);
     translate([x_1,y_0,z_0+1.5*5*size]) rotate([0,0,0])ball(size=5*size);
+  }
+}
+
+
+module pin_prop(rad=2.375,len=30,hei=6,plen=11){
+  rotate([0,90,270])translate([-rad,0,0]) union(){
+    translate([-rad,-len])cube([rad*2,len*2,3]);
+    translate([0,-len])cylinder(h=hei,r=rad);
+    translate([0,len])cylinder(h=hei,r=rad);
+    rotate([0,0,90])pin(h=plen,r=3);
   }
 }
