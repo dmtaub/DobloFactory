@@ -1,3 +1,5 @@
+//24.30  x 4.3
+RAD = 2430/2;//800
 // OpenSCAD Variant of Lego Compatible Disc Buttons
 //   http://www.thingiverse.com/thing:1005
 // Copyright 2009 by Andrew Plumb
@@ -116,7 +118,7 @@ module disc_button()
 	module bottom_disc()
 	{
 		difference() {
-			cylinder(h=320, r=800, center=false);
+			#cylinder(h=320, r=RAD, center=false);
 			bottom_disc_threadholes(shift_middle=0);
 		}
 		translate([400, 400, 0])
@@ -156,15 +158,17 @@ module scaled_disc_button(changeScale=1/mfgGrid_1mm)
 
 
 // disc_button();
-scaled_disc_button(1/95);
-translate([0,20])scaled_disc_button(1/100);
-translate([20,0])scaled_disc_button(1/105);
-translate([20,20])scaled_disc_button(1/110);
+//scaled_disc_button(1/100);
+//translate([0,0,10])cylinder(h=4.3,r=24.3/2);
+// disc_button();
+ translate([0,10]) scaled_disc_button(1/100);
+translate([0,40])scaled_disc_button(1/100);
+translate([30,10])scaled_disc_button(1/100);
+translate([30,40])scaled_disc_button(1/100);
 
 translate([60,0,0]){
-  translate([0,10])scaled_disc_button(1/48.91);
-  translate([0,50])scaled_disc_button(1/50);
-  translate([40,10])scaled_disc_button(1/50.54);
-  translate([40,50])scaled_disc_button(1/55);
+  translate([0,10])scaled_disc_button(1/100);
+  translate([0,40])scaled_disc_button(1/100);
+  translate([30,10])scaled_disc_button(1/100);
+  translate([30,40])scaled_disc_button(1/100);
 }
-

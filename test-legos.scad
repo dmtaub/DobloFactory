@@ -23,11 +23,11 @@ LEGO_DIV = false;
 //hinge2   (20,  3,  0,   4,  4, 3, true, LUGO);
 //rotate([0,0,180])hinge2   (-30,  -7,  0,  4,  4, 3, true, LUGO);
 
-
+difference(){
 hinge1b(DOBLO,1,1);
-hinge1a(DOBLO,3,1);
+#hinge1a(DOBLO,0,1);
+}
+//hinge1b(LUGO,1,1);
+//hinge1a(LUGO,3,-3);
 
-hinge1b(LUGO,1,-3);
-hinge1a(LUGO,3,-3);
-
-pin_prop();
+//pin_prop();
