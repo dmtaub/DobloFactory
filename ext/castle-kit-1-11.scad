@@ -825,28 +825,31 @@ module wall_stairs_16_8_structure (z_corr)
     support_triangle     (-2,  -3,   2*FULL+z_corr+.01,  3,   270,   2, scale=SCALE) ;
     support_triangle     (-2,  -1,   FULL+2*THIRD+z_corr,  4,   270,   2, scale=SCALE) ;
 
+    // that should get me into architecture school
     // 4
     block       (0,  -3,   3*FULL+2*THIRD+z_corr,  2,   3,   THIRD,     true, scale=SCALE);
     block       (0,  -2,   THIRD,  2,   1,   3*FULL+2*THIRD+z_corr,     false, scale=SCALE);
     support_triangle     (0,  -3,   3*FULL+z_corr+.01,  3,   270,   2, scale=SCALE) ;
-    support_triangle     (0,  -1,   2*FULL+2*THIRD+z_corr,  4,   270,   2, scale=SCALE) ;
+    support_triangle     (0,  -1,   2*FULL+2*THIRD+z_corr+0.1,  4,   270,   2, scale=SCALE) ;
 
+    // 5
     block       (2,  -3,   4*FULL+2*THIRD+z_corr,  2,   3,   THIRD,     true, scale=SCALE);
     block       (2,  -2,   THIRD,  2,   1,   4*FULL+2*THIRD+z_corr ,     false, scale=SCALE);
     support_triangle     (2,  -3,   4*FULL+z_corr+0.1,  3,   270,   2, scale=SCALE) ;
     support_triangle     (2,  -1,   3*FULL+2*THIRD+z_corr,  4,   270,   2, scale=SCALE) ;
 
-    // that should get me into architecture school
-    block       (4,  -3,   5*FULL+2*THIRD+z_corr,  2,   3,   THIRD,     true, scale=SCALE);
+    // 6
+    block       (4,  -3,   5*FULL+2*THIRD+z_corr,  2,   3,   THIRD,     false, scale=SCALE);
+    nibbles     (4,  -2,   6*FULL+z_corr,  2,   2,  scale=SCALE);
     block       (4,  -2,   THIRD,   2,   1,   5*FULL+2*THIRD+z_corr ,     false, scale=SCALE);
     support_triangle     (4,  -3,   5*FULL+z_corr+0.1,  3,   270,   2, scale=SCALE) ;
-    support_triangle     (4,  -1,   4*FULL+2*THIRD+z_corr,  4,   270,   2, scale=SCALE) ;
+    support_triangle     (4,  -1,   4*FULL+2*THIRD+z_corr+0.1,  4,   270,   2, scale=SCALE) ;
 
     // last step
     block       (6,  -3,   6*FULL+2*THIRD+z_corr,  2,   3,   THIRD,     true, scale=SCALE);
     block       (6,  -2,   THIRD,   2,   1,   6*FULL+2*THIRD+z_corr ,     false, scale=SCALE);
     // support_triangle     (6,  -3,   6*FULL+z_corr+0.1,  3,   270,   2, scale=SCALE) ;
-    support_triangle     (6,  -1,   5*FULL+2*THIRD+z_corr,  4,   270,   2, scale=SCALE) ;
+    support_triangle     (6,  -1,   5*FULL+2*THIRD+z_corr+0.1,  4,   270,   2, scale=SCALE) ;
 
     // pillars for the wall
     block       (-8,  -3,   THIRD,  1,   1,   FLOOR_BOTTOM+z_corr ,     false, scale=SCALE);

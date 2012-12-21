@@ -74,7 +74,7 @@ echo (str ("SCALE = ", SCALE));
 // wall_thin ();                // --- Simple wall, nicer to look at
 // wall_thin_legobase ();       // --- Simple wall, nicer to look at
 // wall_thin_16 ();             // --- Simple wall on a 16x16 plate
-// wall_stairs_16_8 ();         // --- Wall and stairs on a 16x8 plate
+wall_stairs_16_8 ();         // --- Wall and stairs on a 16x8 plate
 // wall_stairs_legobase ();     // --- Wall and stairs 16 long
 // wall_stairs_16_16 ();        // --- Wall and stairs on a 16x8 plate
 // portal ();                   // --- Portal, a wall with a "door"
