@@ -21,7 +21,7 @@ include <lib/doblo-params.scad>;
 // -------------------------------- DOBLO and STL merging ------------------------------
 
 // Import an STL and place it.
-// Only tested with DUPLOS and Legos !!
+// Only tested with DUPLOS !!
 
 module merge_stl (file, col, row, up, stl_z_offset_mm, scale,shrink = 1) {
 
@@ -392,6 +392,7 @@ module house_fb (col, row, up, width,length,height, scale)
   }		
 }
 
+LEGO_DIV = false;
 module base_plate (col, row, up, width,length,height,nibbles_on_off, scale) 
   /* Use cases:
      - Creating an easy to print base plate for showing off your prints. I believe that buying one in a shop is more efficient ....
@@ -405,8 +406,7 @@ module base_plate (col, row, up, width,length,height,nibbles_on_off, scale)
   offset  = NBO(scale);
   x_start = - width/2  * PART_WIDTH(scale) + NBO(scale);
   y_start = - length/2 * PART_WIDTH(scale) + NBO(scale);
-  // got rid of final lego_div / DKS / 6/12/2012
-  z_pos   = (scale < 0.6) ? height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) * 2 : height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) - LATTICE_WIDTH(scale)/2 ;
+  z_pos   = (LEGO_DIV) ? height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) * 2 : height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) - LATTICE_WIDTH(scale)/2 ;
   n_rows  = (scale > 0.6) ? length-2 : (length-2)/2 ;  // Need less for legos
   n_cols  = (scale > 0.6) ? width-2 :  (width-2)/2;
 
