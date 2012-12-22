@@ -35,7 +35,7 @@ echo (str ("SCALE = ", SCALE));
 
 // --- simple plates
 // base ();                    // --- simple 8x8 base with partly empty floor
-// base_16 ();                 // --- simple 16x16 base with partly empty floor, must have
+base_16 ();                 // --- simple 16x16 base with partly empty floor, must have
 // base_24 ();                 // --- For the ambitious, full 24x25
 // base_legobase ();            // --- simple 8x8 stackable base with partly empty floor
 
@@ -74,7 +74,7 @@ echo (str ("SCALE = ", SCALE));
 // wall_thin ();                // --- Simple wall, nicer to look at
 // wall_thin_legobase ();       // --- Simple wall, nicer to look at
 // wall_thin_16 ();             // --- Simple wall on a 16x16 plate
-wall_stairs_16_8 ();         // --- Wall and stairs on a 16x8 plate
+// wall_stairs_16_8 ();         // --- Wall and stairs on a 16x8 plate
 // wall_stairs_legobase ();     // --- Wall and stairs 16 long
 // wall_stairs_16_16 ();        // --- Wall and stairs on a 16x8 plate
 // portal ();                   // --- Portal, a wall with a "door"
@@ -103,4 +103,8 @@ wall_stairs_16_8 ();         // --- Wall and stairs on a 16x8 plate
 // house_lr   (-5, -1,  0,  10,    4,     10, SCALE) ;
 // house_fb   (-5, -1,  0,  4,    10,     10, SCALE) ;
 // doblo   (0,   0,   0,   4,   2,    FULL,  false, false, SCALE );	
+// doblo   (0,   0,   0,   4,   2,    FULL,  false, false, SCALE );	
 // doblo   (0,   0,   0,   2,   2,    2*THIRD,  false, false, SCALE );	
+
+// flat legobase plate
+// doblo  (-4,  -4,   0,  8,   8,   THIRD,   false, scale=SCALE);
