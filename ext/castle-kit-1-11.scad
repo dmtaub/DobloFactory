@@ -210,6 +210,7 @@ module base_16 ()
 //     zcorr allows to make lego-based towers a third smaller.
 
 module tower_structure (z_corr) {    
+
     // corner towers
     cyl_block   (-4, -4,  THIRD,  2,  2,  WALL_BOTTOM+z_corr,   false, scale=SCALE) ;
     cyl_block   (2,  -4,  THIRD,  2,  2,  WALL_BOTTOM+z_corr,   false, scale=SCALE) ;
@@ -225,6 +226,7 @@ module tower_structure (z_corr) {
     block       (-4, -3, FLOOR_BOTTOM+z_corr,  1,   2,  2*FULL+THIRD,  false, scale=SCALE);
     block       (-4,  1, FLOOR_BOTTOM+z_corr,  1,   2,  2*FULL+THIRD,  false, scale=SCALE);
     block       (-4, -1, FLOOR_BOTTOM+z_corr,  1,   2,  THIRD,  false, scale=SCALE);
+
     support_triangle   (-4.5,-3, 6*FULL+1+z_corr,  2,  180, 6, scale=SCALE);
     nibbles     (-4, -2, WALL_TOP+z_corr,  1,  1, scale=SCALE);
     nibbles     (-4,  1, WALL_TOP+z_corr,  1,  1, scale=SCALE);
@@ -233,11 +235,11 @@ module tower_structure (z_corr) {
     support_triangle     (3.5,  -3, 6*FULL+1+z_corr,  2,    0, 6, scale=SCALE);
     nibbles     (3,  -2, WALL_TOP+z_corr,  1,   4, scale=SCALE);
 
-    block       (-3, -4, FLOOR_BOTTOM+z_corr,  6,  1,    2*FULL+THIRD,     false, scale=SCALE);
+    block       (-3, -4, FLOOR_BOTTOM+z_corr,  6,  1.01,    2*FULL+THIRD,     false, scale=SCALE);
     support_triangle     (-3, -4.5, 6*FULL+1+z_corr,  2,  90, 6, scale=SCALE);
     nibbles     (-2, -4, WALL_TOP+z_corr,  4,   1, scale=SCALE);
 
-    block       (-3, 3, FLOOR_BOTTOM+z_corr,  6,  1,    2*FULL+THIRD,     false, scale=SCALE);
+    # block       (-3, 3, FLOOR_BOTTOM+z_corr,  6,  1.01,    2*FULL+THIRD,     false, scale=SCALE);
     support_triangle   (-3, 3.5, 6*FULL+1+z_corr,  2,  270, 6, scale=SCALE);
     nibbles     (-2, 3, WALL_TOP+z_corr,  4,   1, scale=SCALE);
 
@@ -248,6 +250,7 @@ module tower_structure (z_corr) {
     nibbles (-4, 2,   WALL_TOP+z_corr,  2,   2, scale=SCALE);
 
     // towers for 2 walls
+
     cyl_block  (-1, 2, THIRD,  2,  2,  FLOOR_BOTTOM+z_corr-1,     false, scale=SCALE);
     cyl_block  (-1, -4, THIRD,  2,  2, FLOOR_BOTTOM+z_corr-1,     false, scale=SCALE);
 
@@ -255,6 +258,7 @@ module tower_structure (z_corr) {
     //        (col, row, up, height,degrees) 
 
     // support_triangle along y axis
+
     support_triangle (-3.5, -2.5, 4*FULL+THIRD+z_corr,   10,   "fore", 1, scale=SCALE) ;
     support_triangle (-3.5, 1.5,  4*FULL+THIRD+z_corr,   10,   "back", 1, scale=SCALE) ;
 
@@ -263,16 +267,17 @@ module tower_structure (z_corr) {
 
     support_triangle (2.5, -2.5, 4*FULL+THIRD+z_corr,   10,   "fore", 1, scale=SCALE) ;
     support_triangle (2.5, 1.5,  4*FULL+THIRD+z_corr,   10,   "back", 1, scale=SCALE) ;
+
     // diagonal support_triangle
     support_triangle1 (-2.25, -3,  4*FULL+THIRD+z_corr,   10,   315, 1, scale=SCALE) ;
     support_triangle1 (-3,   2.25, 4*FULL+THIRD+z_corr,   10,   45, 1, scale=SCALE) ;
     support_triangle1 (3.0, -2.25, 4*FULL+THIRD+z_corr,   10,   225, 1, scale=SCALE) ;
     support_triangle1 (2.25, 3.0,  4*FULL+THIRD+z_corr,   10,   135, 1, scale=SCALE) ;
-    // support_triangle along x-axis
-    support_triangle1 (-2.5, -3.5, 4*FULL+THIRD+z_corr,   10,   0, 1, scale=SCALE) ;
-    support_triangle1 (-2.5, 2.5,  4*FULL+THIRD+z_corr,   10,   0, 1, scale=SCALE) ;
-    support_triangle1 (2.5, -2.5,  4*FULL+THIRD+z_corr,   10,   180, 1, scale=SCALE) ;
-    support_triangle1 (2.5, 3.5,   4*FULL+THIRD+z_corr,   10,   180, 1, scale=SCALE) ;
+    // support_triangle along x-axis - non-standard width to avoid non-simple models
+    support_triangle1 (-2.4, -3.5, 4*FULL+THIRD+z_corr+0.1,   10.2,   0, 1.1, scale=SCALE) ;
+    support_triangle1 (-2.4, 2.4,  4*FULL+THIRD+z_corr+0.1,   10.2,   0, 1.1, scale=SCALE) ;
+    support_triangle1 (2.6, -2.4,  4*FULL+THIRD+z_corr+0.1,   10.2,   180, 1.1, scale=SCALE) ;
+    support_triangle1 (2.6, 3.5,   4*FULL+THIRD+z_corr+0.1,   10.2,   180, 1.1, scale=SCALE) ;
 }
 
 // ---- tower on 8x8 basis
@@ -296,7 +301,7 @@ module tower_16 ()
     nibbles  (6,  -6,   THIRD,  2,   14, scale=SCALE);
     nibbles  (-6,  -2,   THIRD,  2,   4, scale=SCALE);
     nibbles  (4,  -2,   THIRD,  2,   4, scale=SCALE);
-    nibbles     (-4,  -2,  THIRD,  8,   4, scale=SCALE);
+    nibbles  (-4,  -2,  THIRD,  8,   4, scale=SCALE);
     tower_structure (THIRD);
 }
 

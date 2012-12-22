@@ -35,13 +35,13 @@ echo (str ("SCALE = ", SCALE));
 
 // --- simple plates
 // base ();                    // --- simple 8x8 base with partly empty floor
-base_16 ();                 // --- simple 16x16 base with partly empty floor, must have
+// base_16 ();                 // --- simple 16x16 base with partly empty floor, must have
 // base_24 ();                 // --- For the ambitious, full 24x25
 // base_legobase ();            // --- simple 8x8 stackable base with partly empty floor
 
 // --- square tower
 // tower();                     // --- 8x8 Tower
-// tower_16();                  // --- 8x8 Tower sitting on a 16x16 base plate, must have
+tower_16();                  // --- 8x8 Tower sitting on a 16x16 base plate, must have
 // tower_legobase();            // --- tower, must have
 
 // --- fairly ugly corner tower 
