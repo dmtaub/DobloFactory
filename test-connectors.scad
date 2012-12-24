@@ -17,3 +17,10 @@ hinge1a(DOBLO,3,-4);
 
 hinge1b(LUGO,1,-3);
 hinge1a(LUGO,3,-3);
+
+// propeller for duplo plane
+translate([70,20,0])pin_prop();
+
+
+socket_doblo   (4,   8,   0,   2,   2,diamonds=true,size=DOBLO);
+ball_doblo   (5,   -4,   0,   2,   2,diamonds=true,size=DOBLO);

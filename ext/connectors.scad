@@ -9,7 +9,7 @@
 */
 include <../vendor/pins/buser_pins.scad>;
 
-module hinge_y(xoff, yoff, zoff,length,width,height=3,nibbles=true,size=DOBLO, $fs=0.01){
+module hinge_y(xoff, yoff, zoff,length,width,height=3,nibbles=true,size=DOBLO, $fs=0.01,type=0){
   BLOCKWIDTH=DOBLOWIDTH(size)/2/size;
   //sepr = BLOCKWIDTH *(sep);
   BLOCKHEIGHT = DOBLOHEIGHT(size)/(2*size);  
@@ -19,21 +19,21 @@ module hinge_y(xoff, yoff, zoff,length,width,height=3,nibbles=true,size=DOBLO, $
 
     union(){
       doblo   (xoff,   yoff,   zoff,   length,   width,    height,  nibbles, false, size);
-      hinge_a (xoff, yoff, zoff, width,length, height, BLOCKWIDTH, BLOCKHEIGHT);
+      hinge_a (xoff, yoff, zoff, width,length, height, BLOCKWIDTH, BLOCKHEIGHT,type);
     }
 }
 
 
-module hinge_a (xoff, yoff, zoff, width,length,height, BLOCKWIDTH, BLOCKHEIGHT)
+module hinge_a (xoff, yoff, zoff, width,length,height, BLOCKWIDTH, BLOCKHEIGHT,type = 0)
 {
   h_len = BLOCKWIDTH/4;
-  clip = h_len /15;
+  clip = h_len /14;
   rad_i = h_len/2;
   rad_o = BLOCKHEIGHT/2;
   if (width > 1){
     for(i=[1:width]){
       translate([(xoff+length)*BLOCKWIDTH,-clip/2+(-yoff-width)*BLOCKWIDTH+h_len*2*(i*2-1),(zoff/3)*BLOCKHEIGHT]) {
-        if ( (i%2) == 0) {
+        if ( (i%2) == type) {
           difference(){
             hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
             //#translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i);
