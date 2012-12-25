@@ -60,39 +60,48 @@ module hinge_arm(BLOCKWIDTH,h_len,rad_o,clip){
    }
 }
 
-module hinge1a(size,offx=0,offy=0){
-  height = 6;
+
+
+//offz still needs work
+module hinge_z_hole(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,size=DOBLO,tight=true){
   BLOCKHEIGHT = height/6*DOBLOHEIGHT(size)/(2*size);
   ABIT =  1/40*BLOCKHEIGHT;
-  x=PART_WIDTH(size)+PART_WIDTH(size)*offx;
+  //x=PART_WIDTH(size)+PART_WIDTH(size)*offx;
+  x=PART_WIDTH(size)*offx;
   y=-PART_WIDTH(size)*offy-INSET_WIDTH(size)/2;
+  //y=-PART_WIDTH(size)*offy;
   w=-DOBLOWALL(size);
   RI=NB_RADIUS(size)+INSET_WIDTH(size)/2; //w2.6
   hei = 9/7*BLOCKHEIGHT;
   RO=NB_BOTTOM_RADIUS(size); //w3.5
   RII = RO-DOBLOWALL(size)/5; //w3.2
-  echo(["xA:",RI,RO, RII,ABIT,9/7*BLOCKHEIGHT]);
-
+  //echo(["xA:",RI,RO, RII,ABIT,9/7*BLOCKHEIGHT]);
+ 
+  function hole_x() = (offx < offy) ? x+PART_WIDTH(size) : x; 
+  function hole_y() = (offx < offy) ? y : y-PART_WIDTH(size);
   difference(){
     union()
     {
-      doblo   (offx,   offy,   0,   1,   2,    height,  true, false, size);
-      translate([x,y,0])
+      doblo   (offx,   offy, offz, width, length, height, nibbles, false, size);
+      #translate([hole_x(),hole_y(),0])
       {
         difference(){
           cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
-          translate([w,w-y,-ABIT]) block (-.5,offy,0,.5,.5,2,false,size);
+          if (offx > offy)
+            translate([-w,-3/2*w,-ABIT]) block (0,-.5,0,.5,.5,2,false,size);
+          else
+            translate([w,w/2,-ABIT]) block (-.5,0,0,.5,.5,2,false,size);
         }
       }
     }
     union()
     {   
-      translate([x,y,-1/7*BLOCKHEIGHT])
+      translate([hole_x(),hole_y(),-1/7*BLOCKHEIGHT])
       {
         translate([0,0,hei+1/7*BLOCKHEIGHT])rotate([0,180,0])pinhole(h=hei,r=NB_RADIUS(size));
         //cylinder(11/7*BLOCKHEIGHT,RI,RI,$fs=.01);
       }
-      translate([x,y,9/7*BLOCKHEIGHT])
+      translate([hole_x(),hole_y(),9/7*BLOCKHEIGHT])
       {
         cylinder(31/42*BLOCKHEIGHT,RII,RII,$fs=.001);
       }
@@ -101,8 +110,9 @@ module hinge1a(size,offx=0,offy=0){
 }
 
 
-module hinge1b(size,offx=0,offy=0){
-  height = 6;
+module hinge_z_pin(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,size=DOBLO,slit=true){
+
+  //height = 6;
   BLOCKHEIGHT = height/6*DOBLOHEIGHT(size)/(2*size);
   ABIT =  1/40*BLOCKHEIGHT;
   x=PART_WIDTH(size)*offx;
@@ -112,18 +122,18 @@ module hinge1b(size,offx=0,offy=0){
   RO=NB_RADIUS(size); 
   RII = NB_BOTTOM_RADIUS(size);
   hei = BLOCKHEIGHT*9/7;
-  echo(["B:",RI,RO, RII, ABIT]);
+  //echo(["B:",RI,RO, RII, ABIT]);
 
   union()
   {
     difference(){
-      doblo   (offx,   offy,   0,   1,   2,    height,  true, false, size);
+      doblo   (offx,   offy,   offz,   width,   length,    height,  nibbles, false, size);
       translate([x,y,-ABIT]) cylinder(ABIT+9/7*BLOCKHEIGHT,RII,RII,$fs=.001);
 
     }
     translate([x,y,0]) {  
       union(){
-        translate([0,0,hei]) rotate([180,0,0])pin(r=RO,h=hei);
+        translate([0,0,hei]) rotate([180,0,0])pin(r=RO,h=hei,slit=slit);
         translate([0,0,9/7*BLOCKHEIGHT]) cylinder(5/7*BLOCKHEIGHT,2*RI,2*RI,$fs=.01);
       }
     }
