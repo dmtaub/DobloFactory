@@ -32,7 +32,7 @@ Dimensions:
 
 */
 
-
+// replicator is 12 x 7 duplo-sized units
 
 // DATA FOR QUATRO (DMT)
 // nibble outter diam: 18.45 
