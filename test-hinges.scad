@@ -2,18 +2,20 @@ include <doblo-factory.scad>;
 include <lib/doblo-params-repl.scad>;
 include <ext/connectors.scad>;
 
-
-// for odd-length hinges, must specify one of each 'type' AKA handedness
-hinge_y   (4,  4,  0,   2,  3, HALF, true, DOBLO,type = 0);
-hinge_y   (4,  0,  0,   2,  3, HALF, true, DOBLO,type = 1);
-
-// even-length hinges are symmetrical 
-hinge_y   (0,  5,  0,   2,  4, HALF, true, DOBLO);
-hinge_y   (0,  0,  0,   2,  4, HALF, true, DOBLO);
+hinge_y   (0,  0,  0,   1,  4, 3, true, DOBLO);
+hinge_y  (2,  0,  0,   1,  4, 3, true, DOBLO);
 
 
-hinge1b(DOBLO,1,-4);
-hinge1a(DOBLO,3,-4);
+/*
+//default settings have a large tolerance 
+// and a pin that is a complete cylinder (may need sanding)
+// so that it is less likely to break
 
-hinge1b(LUGO,1,-3);
-hinge1a(LUGO,3,-3);
+hinge1a(DOBLO,0,5);
+hinge1b(DOBLO,2,5);
+
+*/
+
+hinge1b(DOBLO,2,5,whole_pin=false);
+hinge1a(DOBLO,0,5,tolerance=.5);
+

@@ -48,7 +48,7 @@ module pinhole(h=10, r=4, lh=3, lt=1, t=0.3, tight=true) {
   }
 }
 
-module pin(h=10, r=4, lh=3, lt=1, side=false, slit=true) {
+module pin(h=10, r=4, lh=3, lt=1, side=false, reduction_factor = 2.5, slit = true) {
   // h = shaft height
   // r = shaft radius
   // lh = lip height
@@ -56,9 +56,9 @@ module pin(h=10, r=4, lh=3, lt=1, side=false, slit=true) {
   // side = set to true if you want it printed horizontally
 
   if (side) {
-    pin_horizontal(h, r, lh, lt, slit);
+    pin_horizontal(h, r, lh, lt, reduction_factor, slit);
   } else {
-    pin_vertical(h, r, lh, lt, slit);
+    pin_vertical(h, r, lh, lt, reduction_factor, slit);
   }
 }
 
@@ -81,7 +81,7 @@ module pinpeg(h=20, r=4, lh=3, lt=1) {
 
 // just call pin instead, I made this module because it was easier to do the rotation option this way
 // since openscad complains of recursion if I did it all in one module
-module pin_vertical(h=10, r=4, lh=3, lt=1,slit=true) {
+module pin_vertical(h=10, r=4, lh=3, lt=1,reduction_factor = 2.5, slit =true) {
   // h = shaft height
   // r = shaft radius
   // lh = lip height
@@ -93,7 +93,7 @@ module pin_vertical(h=10, r=4, lh=3, lt=1,slit=true) {
     // center cut
     if (slit)
       translate([-r*0.5/2, -(r*2+lt*2)/2, h/4]) cube([r*0.5, r*2+lt*2, h]);
-    translate([0, 0, h/4]) cylinder(h=h+lh, r=r/2.5, $fn=20);
+    translate([0, 0, h/4]) cylinder(h=h+lh, r=r/reduction_factor, $fn=20);
     // center curve
     // translate([0, 0, h/4]) rotate([90, 0, 0]) cylinder(h=r*2, r=r*0.5/2, center=true, $fn=20);
   
@@ -104,12 +104,12 @@ module pin_vertical(h=10, r=4, lh=3, lt=1,slit=true) {
 }
 
 // call pin with side=true instead of this
-module pin_horizontal(h=10, r=4, lh=3, lt=1,slit=true) {
+module pin_horizontal(h=10, r=4, lh=3, lt=1,reduction_factor = 2.5, slit =true) {
   // h = shaft height
   // r = shaft radius
   // lh = lip height
   // lt = lip thickness
-  translate([0, h/2, r*1.125-lt]) rotate([90, 0, 0]) pin_vertical(h, r, lh, lt,slit);
+  translate([0, h/2, r*1.125-lt]) rotate([90, 0, 0]) pin_vertical(h, r, lh, lt,reduction_factor, slit);
 }
 
 // this is mainly to make the pinhole module easier
