@@ -19,3 +19,7 @@ hinge1b(DOBLO,2,5);
 hinge1b(DOBLO,2,5,whole_pin=false);
 hinge1a(DOBLO,0,5,tolerance=.5);
 
+/*
+hinge_z_hole (0,3,  0,   4,  2, HALF, true, DOBLO);
+hinge_z_pin (0,6,  0,   4,  2, HALF, true, DOBLO,slit=false);
+*/
