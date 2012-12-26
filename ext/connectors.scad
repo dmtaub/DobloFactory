@@ -77,17 +77,17 @@ module hinge_z_hole(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,
   RII = RO-DOBLOWALL(size)/5; //w3.2
   //echo(["xA:",RI,RO, RII,ABIT,9/7*BLOCKHEIGHT]);
  
-  function hole_x() = (offx < offy) ? x+PART_WIDTH(size) : x; 
-  function hole_y() = (offx < offy) ? y : y-PART_WIDTH(size);
+  function hole_x() = (width < length) ? x+PART_WIDTH(size)*width : x; 
+  function hole_y() = (width < length) ? y : y-PART_WIDTH(size)*length;
   difference(){
     union()
     {
       doblo   (offx,   offy, offz, width, length, height, nibbles, false, size);
-      #translate([hole_x(),hole_y(),0])
+      translate([hole_x(),hole_y(),0])
       {
         difference(){
           cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
-          if (offx > offy)
+          if (width > length)
             translate([-w,-3/2*w,-ABIT]) block (0,-.5,0,.5,.5,2,false,size);
           else
             translate([w,w/2,-ABIT]) block (-.5,0,0,.5,.5,2,false,size);
@@ -139,35 +139,6 @@ module hinge_z_pin(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,s
     }
   }
 }
-
-
-module hinge_z (xoff, yoff, zoff, width,length,height, BLOCKWIDTH, BLOCKHEIGHT)
-{
-  h_len = BLOCKWIDTH/4;
-  clip = h_len /10;
-  rad_i = h_len/2;
-  rad_o = BLOCKHEIGHT/2;
-  if (width > 1){
-    for(i=[1:width]){
-      translate([(xoff+length)*BLOCKWIDTH,-clip/2+(-yoff-width)*BLOCKWIDTH+h_len*2*(i*2-1),(zoff/3)*BLOCKHEIGHT]) {
-        if ( (i%2) == 0) {
-          difference(){
-            hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
-            //#translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i);
-            translate([.5*BLOCKWIDTH,2*h_len+clip,rad_o])rotate([90,0,0])cylinder(h=h_len*2+clip,r=rad_i*1.2);
-          }
-        }
-        else {
-          union(){
-            hinge_arm(BLOCKWIDTH,h_len,rad_o,clip);
-            //translate([.5*BLOCKWIDTH,clip,rad_o])sphere(r=rad_i*8/10);
-            translate([.5*BLOCKWIDTH,1.5*rad_i+clip,rad_o])sphere(r=2*rad_i);
-          }
-        }
-      } //end translate
-    } // end for
-  } //end if
-} //end module
 
 
 module hinge_arm(BLOCKWIDTH,h_len,rad_o,clip){
