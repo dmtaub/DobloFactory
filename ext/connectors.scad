@@ -9,8 +9,8 @@
 */
 include <../vendor/pins/buser_pins.scad>;
 
-off_cyl = 3; // offset of cyl/pin in both x and y
-off_pin = 0; // offset of pin in just one dimension
+off_cyl = 2; // offset of cyl/pin in both x and y
+off_pin = 3; // offset of pin in just one dimension
 
 module hinge_y(xoff, yoff, zoff,length,width,height=3,nibbles=true,size=DOBLO, $fs=0.01,type=0){
   BLOCKWIDTH=DOBLOWIDTH(size)/2/size;
