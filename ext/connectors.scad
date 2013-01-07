@@ -9,8 +9,10 @@
 */
 include <../vendor/pins/buser_pins.scad>;
 
-off_cyl = 2; // offset of cyl/pin in both x and y
-off_pin = 3; // offset of pin in just one dimension
+off_cyl_x = 3; // offset of cyl/pin in 'x'
+off_cyl_y = 1; // offset of cyl/pin in 'y'
+
+off_pin = 0; // offset of pin in just 'x'
 
 module hinge_y(xoff, yoff, zoff,length,width,height=3,nibbles=true,size=DOBLO, $fs=0.01,type=0){
   BLOCKWIDTH=DOBLOWIDTH(size)/2/size;
@@ -77,9 +79,10 @@ module hinge_z_hole(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,
   RO=NB_BOTTOM_RADIUS(size); //w3.5
   RII = RO-DOBLOWALL(size)/5; //w3.2
   //echo(["xA:",RI,RO, RII,ABIT,9/7*BLOCKHEIGHT]);
-  oc = off_cyl*ABIT;
-  function hole_x() = (width < length) ? x+PART_WIDTH(size)+oc : x-oc;
-  function hole_y() = (width < length) ? y+oc : y-PART_WIDTH(size)-oc;
+  ocx = off_cyl_x*ABIT;
+  ocy = off_cyl_y*ABIT;
+  function hole_x() = (width < length) ? x+PART_WIDTH(size)+ocx : x-ocy;
+  function hole_y() = (width < length) ? y+ocy : y-PART_WIDTH(size)-ocx;
   difference(){
     union()
     {
@@ -89,9 +92,9 @@ module hinge_z_hole(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,
         difference(){
           cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
           if (width > length)
-            translate([-w+oc,-w+oc,-ABIT]) block (0,-.5,0,.5,.5,2,false,size);
+            translate([-w+ocy,-w+ocx,-ABIT]) block (0,-.5,0,.5,.5,2,false,size);
           else
-            translate([w-oc,w-oc,-ABIT]) block (-.5,0,0,.5,.5,2,false,size);
+            translate([w-ocx,w-ocy,-ABIT]) block (-.5,0,0,.5,.5,2,false,size);
         }
       }
     }
@@ -113,17 +116,20 @@ module hinge_z_hole(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,
 
 module hinge_z_pin(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,size=DOBLO,slit=false){
   //height = 6;
-  function pin_ox() = (width < length) ? -off_pin*ABIT: -off_cyl*ABIT;
-  function pin_oy() = (width < length) ? off_cyl*ABIT : off_pin*ABIT ;
+  function pin_ox() = (width < length) ? (-off_cyl_x+off_pin)*ABIT: -off_cyl_y*ABIT;
+  function pin_oy() = (width < length) ? off_cyl_y*ABIT : (off_cyl_x-off_pin)*ABIT ;
 
   BLOCKHEIGHT = height/6*DOBLOHEIGHT(size)/(2*size);
   ABIT =  1/40*BLOCKHEIGHT;
   x=PART_WIDTH(size)*offx+pin_ox();
   y=-PART_WIDTH(size)*offy+pin_oy();
+  z=PART_WIDTH(size)*offz;
   w=-DOBLOWALL(size);
   RI=NB_RADIUS(size)/2+INSET_WIDTH(size)/2; //w2.6
   RO=NB_RADIUS(size); 
   RII = NB_BOTTOM_RADIUS(size)+ABIT;
+  BS = PART_WIDTH(size)/2;
+  RS = PART_WIDTH(size)/2-INSET_WIDTH(size);
   hei = BLOCKHEIGHT*9/7;
   //echo(["B:",RI,RO, RII, ABIT]);
 
@@ -134,6 +140,20 @@ module hinge_z_pin(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,s
       translate([x,y,-ABIT]) cylinder(ABIT+9/7*BLOCKHEIGHT,RII,RII,$fs=.001);
 
     }
+    
+  // this section for added support - not finished
+  *translate([PART_WIDTH(size)*offx,-PART_WIDTH(size)*offy,0]){
+    intersection(){
+      translate([0,-BS+w/2,z])cube([BS-w/2,BS-w/2,BLOCKHEIGHT]);
+      translate([0,0,0]) {  
+        difference(){
+          translate([0,0,ABIT/2])cylinder(BLOCKHEIGHT+ABIT,RS+INSET_WIDTH(size),RS+INSET_WIDTH(size));
+          cylinder(BLOCKHEIGHT,RS,RS);
+        }
+      }
+    }
+   }
+
     translate([x,y,0]) {  
       union(){
         translate([0,0,hei]) rotate([180,0,0])pin(r=RO,h=hei,lr=2,reduction_factor=2, slit=slit);
