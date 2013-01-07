@@ -12,7 +12,7 @@ hinge_y   (0,  5,  0,   2,  4, HALF, true, DOBLO);
 hinge_y   (0,  0,  0,   2,  4, HALF, true, DOBLO);
 
 hinge_z_pin (0.5,  -4.5,  0,   2,  1, FULL, true, DOBLO,slit=false);
-hinge_z_hole (0.5,  -2.3,  0,   2,  1, FULL, true, DOBLO);
+hinge_z_hole (0.5,  -2.3,  0,   2,  1, FULL, true, DOBLO); //tolerance = .75 if using slit for a tight fit
 
 // propeller for duplo plane
 translate([50,15,0])pin_prop();
