@@ -104,10 +104,10 @@ function NB_BOTTOM_RADIUS_INSIDE(SCALE) = (SCALE < 0.6) ? 4.8/2*LEGO_SCALE(SCALE
 
 // walls - IMPORTANT: must be adjusted with respect to layer resolution and other slicing considerations
 
-function DOBLOWALL(SCALE) = (SCALE < 0.6) ? 1.1 * LEGO_SCALE(SCALE): 1.55 *SCALE; // Lego vs. Duplo, Lego is not 2x smaller
+function DOBLOWALL(SCALE) = (SCALE < 0.6) ? 1.1 * LEGO_SCALE(SCALE): 1.6 *SCALE; // Lego vs. Duplo, Lego is not 2x smaller
 
 function USE_INSET(SCALE) = true;//(SCALE < 0.6) ? false : true;
-function INSET_WIDTH(SCALE)    = (SCALE < 0.6) ? 0.6 *LEGO_SCALE(SCALE) : 1.50 * SCALE; //little inset walls to make it stick
+function INSET_WIDTH(SCALE)    = (SCALE < 0.6) ? 0.6 *LEGO_SCALE(SCALE) : 1.60 * SCALE; //little inset walls to make it stick
 function INSET_LENGTH(SCALE)  = (SCALE < 0.6) ? 3*DOBLOWALL(SCALE) : 4*DOBLOWALL(SCALE); // Legos have proportionally smaller insets
 
 //lattice width and height (optional, see LATTICE_TYPE)
