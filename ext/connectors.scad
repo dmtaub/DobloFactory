@@ -9,7 +9,7 @@
 */
 include <../vendor/pins/buser_pins.scad>;
 
-off_cyl_x = 3; // offset of cyl/pin in 'x'
+off_cyl_x = 2; // offset of cyl/pin in 'x'
 off_cyl_y = 1; // offset of cyl/pin in 'y'
 
 off_pin = 0; // offset of pin in just 'x'
@@ -92,10 +92,12 @@ module hinge_z_hole(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,
       {
         difference(){
           cylinder(9/7*BLOCKHEIGHT,RO,RO,$fs=.001);
+          /*
           if (width > length)
             translate([-w+ocy,-w+ocx,-ABIT]) block (0,-.5,0,.5,.5,2,false,size);
           else
             translate([w-ocx,w-ocy,-ABIT]) block (-.5,0,0,.5,.5,2,false,size);
+          */
         }
       }
     }
