@@ -132,6 +132,7 @@ module hinge_z_pin(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,s
   RO=NB_RADIUS(size); 
   RII = NB_BOTTOM_RADIUS(size)+ABIT;
   BS = PART_WIDTH(size)/2;
+  IS = INSET_WIDTH(size);
   RS = PART_WIDTH(size)/2-INSET_WIDTH(size);
   hei = BLOCKHEIGHT*9/7;
   //echo(["B:",RI,RO, RII, ABIT]);
@@ -140,22 +141,22 @@ module hinge_z_pin(offx=0,offy=0,offz=0,width=1,length=2,height=6,nibbles=true,s
   {
     difference(){
       doblo   (offx,   offy,   offz,   width,   length,    height,  nibbles, false, size);
-      translate([x,y,z-ABIT]) cylinder(ABIT+9/7*BLOCKHEIGHT,RII,RII,$fs=.001);
+      translate([x,y,z-ABIT]) cylinder(ABIT+hei,RII,RII,$fs=.001);
 
     }
     
-  // this section for added support - not finished
-  *translate([PART_WIDTH(size)*offx,-PART_WIDTH(size)*offy,0]){
-    intersection(){
-      translate([0,-BS+w/2,z])cube([BS-w/2,BS-w/2,BLOCKHEIGHT]);
-      translate([0,0,0]) {  
-        difference(){
-          translate([0,0,ABIT/2])cylinder(BLOCKHEIGHT+ABIT,RS+INSET_WIDTH(size),RS+INSET_WIDTH(size));
-          cylinder(BLOCKHEIGHT,RS,RS);
-        }
-      }
-    }
+  // this section for added support - not fully tested
+   if ((size >= DOBLO) && (height > 3)) translate([x-pin_ox()+IS,y-pin_oy()-IS,z+ABIT]) 
+   {
+     intersection(){
+       translate([-ABIT,-BS+ABIT,BLOCKHEIGHT])cube([BS,BS,BS]);
+       difference(){
+         cylinder(BLOCKHEIGHT*2,RS,RS);
+         translate([0,0,-ABIT])cylinder(BLOCKHEIGHT*2,RS-IS,RS-IS);
+       }
+     }
    }
+   //translate([x-pin_ox()+IS,y-pin_oy()-IS,z]) rotate([0,0,45])cube([RS,IS*4,hei],true);
 
     translate([x,y,z]) {  
       union(){
