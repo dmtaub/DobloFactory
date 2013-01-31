@@ -406,7 +406,7 @@ module base_plate (col, row, up, width,length,height,nibbles_on_off, scale)
   offset  = NBO(scale);
   x_start = - width/2  * PART_WIDTH(scale) + NBO(scale);
   y_start = - length/2 * PART_WIDTH(scale) + NBO(scale);
-  z_pos   = (LEGO_DIV) ? height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) * 2 : height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) - LATTICE_WIDTH(scale)/2 ;
+  z_pos   = (scale<0.6) ? height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) * 2 : height * PART_HEIGHT(scale)/2 - LATTICE_WIDTH(scale) - LATTICE_WIDTH(scale)/2 ;
   n_rows  = (scale > 0.6) ? length-2 : (length-2)/2 ;  // Need less for legos
   n_cols  = (scale > 0.6) ? width-2 :  (width-2)/2;
 
