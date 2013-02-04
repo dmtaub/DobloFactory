@@ -1,7 +1,7 @@
 /*
 
+ Copyright (c) 2013 Daniel M. Taub
  Copyright (c) 2010 Daniel K. Schneider
- Copyright (c) 2012 Daniel M. Taub
  
  This file is part of DobloFactory.
 

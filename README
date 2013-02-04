@@ -1,7 +1,6 @@
-NOTE THIS FILE IS CURRENTLY OUT OF DATE 
 
+ Copyright (c) 2013 Daniel M. Taub
  Copyright (c) 2010 Daniel K. Schneider
- Copyright (c) 2012 Daniel M. Taub
  
  This file is part of DobloFactory.
  DOBLO: DUPLO-compatible scenery factory
@@ -15,6 +14,8 @@ NOTE THIS FILE IS CURRENTLY OUT OF DATE
     with this source package. 
     If not, see <http://creativecommons.org/licenses/by-nc-sa/3.0/>
 
+NOTE THIS FILE MAY BE OUT OF DATE 
+test-foo.scad files are good documentation for library components.
 
 Read down to understand how to use this.
 Documentation (similar as here, but more readable)
@@ -32,7 +33,7 @@ BUGS, missing pieces, other things to do:
 
 Authors:
 - Daniel K. Schneider, TECFA, University of Geneva, March 2010
-- refactored by Daniel M. Taub, CEMI.org, October 2012 
+- refactored by Daniel M. Taub, CEMI.org, October 2012, January 2013
 - based on parametric lego duplo (http://www.thingiverse.com/thing:1778) by Domonoky
 - based on OpenSCAD Bitmap Fonts Module (http://www.thingiverse.com/thing:2054) by Tony Buser.
 

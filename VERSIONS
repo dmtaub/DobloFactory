@@ -1,5 +1,17 @@
 DOBLO: DUPLO-compatible scenery factory
 
+todo: 
+- Use write.scad for better text support
+- enable rounded-top nibbles for doblo
+- CADRO BLOCKS!
+- Use MCAD for support of gears and other mechanical elements?
+- More UniversalConnectorKit-like aspects?
+
+Version 2.1 - jan 2013
+- includes stls for test-import.scad to make duplo pieces, with attribution
+- change authorship order
+- including newest version of Z-axis hinge in connectors library
+
 Version 2.0 - oct 2012
 - modularized and source-controlled
 - functional passing of scale for each element

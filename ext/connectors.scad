@@ -1,6 +1,6 @@
 /* Connectors Library for DobloFactory
 
- Daniel Taub (dan@cemi.org) November 2012
+ Daniel Taub (dan@cemi.org) November-January 2013
 
  includes:
    hinge_y - rotates about y

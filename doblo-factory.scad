@@ -1,7 +1,7 @@
 /*
 
+ Copyright (c) 2013 Daniel M. Taub
  Copyright (c) 2010 Daniel K. Schneider
- Copyright (c) 2012 Daniel M. Taub
  
  This file is part of DobloFactory.
 
@@ -121,9 +121,9 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
           union()
           {
             for(j=[1:length])
-                translate([0,-PART_WIDTH(scale)*length/2+j*2*NO(scale)-2*NO(scale)/2,0]) cube([width*PART_WIDTH(scale), INSET_WIDTH(scale), height*PART_HEIGHT(scale)],true);
+              translate([0,-PART_WIDTH(scale)*length/2+j*2*NO(scale)-2*NO(scale)/2,0]) cube([width*PART_WIDTH(scale), INSET_WIDTH(scale), height*PART_HEIGHT(scale)],true);
             for (i = [1:width])
-                translate([-PART_WIDTH(scale)*width/2+i*2*NO(scale)-2*NO(scale)/2,00]) cube([INSET_WIDTH(scale), length*PART_WIDTH(scale), height*PART_HEIGHT(scale)],true);
+              translate([-PART_WIDTH(scale)*width/2+i*2*NO(scale)-2*NO(scale)/2,00]) cube([INSET_WIDTH(scale), length*PART_WIDTH(scale), height*PART_HEIGHT(scale)],true);
           }
           cube([width*PART_WIDTH(scale)-INSET_LENGTH(scale), length*PART_WIDTH(scale)-INSET_LENGTH(scale), height*PART_HEIGHT(scale)+2], true);
         }
