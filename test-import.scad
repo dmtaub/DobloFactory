@@ -5,16 +5,16 @@ include <lib/doblo-params-repl.scad>;
 NOTE: Source and license information for these STLs can be found in the file called COPYING in the stls directory
 */
 
-/* hippo */  
+/* hippo 
 doblo   (3,   0,   0,   2,   4	,    3,  false, true, DOBLO);
 merge_stl ("stls/hippo.stl",3.0,  .93,   -3.3, 20, DOBLO,.93);
+*/
 
-
-/* duck
+/* duck */
 doblo   (3,   3,   0,   2,   2	,    3,  false, true, DOBLO);
 block(4,5.06,0,.5,.4,5,false,DOBLO);
 merge_stl ("stls/rubber_duck_supports.stl",1.24,  .28,   0, 8, DOBLO,2);
-*/
+
 
 /* cat sitting
 doblo   (3,   0,   0,   2,   3	,    3,  false, true, DOBLO);

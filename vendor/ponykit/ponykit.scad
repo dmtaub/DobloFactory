@@ -5,12 +5,14 @@
    http://www.thingiverse.com/thing:6123
  */
 
-module pony(tail=0,mane=0,horn=0,wings=false,conv = 3){
+module pony(tail=0,mane=0,horn=0,wings=false,body=true,ears=true,conv = 3){
   translate([0,0,19])union(){
-    import_stl("vendor/ponykit/ponybase.stl", convexity=conv);
+    if (body)
+      import_stl("vendor/ponykit/ponybase.stl", convexity=conv);
     tail(tail);
     mane(mane);
-    ears();
+    if (ears)
+       ears();
     horn(horn);
     if (wings)
       wings();
