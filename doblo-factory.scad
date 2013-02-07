@@ -132,7 +132,7 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
 }
 
 
-module nibbles (col, row, up, width, length, scale,extra = false)
+module nibbles (col, row, up, width, length, scale, extra = false)
   /* Use cases:
      - needed by the doblo and the block modules
      - can also be stuck on top on parts of a nibble-less doblo or block
@@ -561,8 +561,8 @@ module ramp1 (col,row,up,height,angle)
 
 module doblonibble(extra=false) {
   // Lego size does not have holes in the nibbles
-   nb_r = NB_RADIUS(scale) + (extra ? DOBLOWALL(scale)/2 : 0);
-   nb_r_i = NB_RADIUS_INSIDE(scale) + (extra ? DOBLOWALL(scale)/2 : 0);
+   nb_r = NB_RADIUS(scale) + (extra ? DOBLOWALL(scale)/2.2 : 0);
+   nb_r_i = NB_RADIUS_INSIDE(scale) + (extra ? DOBLOWALL(scale)/2.2 : 0);
   if (scale < 0.6) {
     cylinder(r=nb_r,           h=NH(scale),  center=true,  $fs = 0.2);
   } else {
