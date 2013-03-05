@@ -588,3 +588,29 @@ module doblobottomnibble_thin(height_mm)
   //cylinder(r=NB_BOTTOM_RADIUS_INSIDE(scale)/4, h=height_mm+1,center=true,$fs = 0.2);
 
 }
+
+
+module rounded_block(col,row,up,width,length,height,nibbles,size,cw=1){
+  //intersection(){
+    union(){
+      curve(col-1,row,up,cw,length,height,blockType=size);
+      block(col,row,up,width,length,height,nibbles,size);
+      curve(col+width,row,up,cw,length,height,blockType=size,xflip=false);
+    }
+  //  doblo(col,row,up,width,length,height,nibbles,false,size);
+ // }
+
+}
+
+module curve(x=0,y=0,z=0,w=1,h=1,d=FULL,xflip=true,blockType=DOBLO){
+  bwidth = DOBLOWIDTH(blockType)/blockType;
+  bheight = PART_HEIGHT(blockType);
+  offset = xflip ? -bwidth/2 : 0;
+  boxoffset = xflip ? (1-w)*bwidth/2 : 0;
+
+  translate([(x/2)*bwidth-offset,(-y/2)*bwidth,(z)*bheight])
+    intersection(){
+      rotate([90,0,0])scale([1,bheight*d*2/(bwidth*w/2) ,1])cylinder(h=bwidth/2*h,r=w*bwidth/4);
+      translate([boxoffset+offset,-bwidth/2*h-.05,0])cube([(w)*bwidth/2,h*bwidth/2+.1,bheight*d]);
+    }
+}
