@@ -66,7 +66,7 @@ module doblo (col, row, up, width,length,height,nibbles_on_off,diamonds_on_off,s
             cube([width*PART_WIDTH(scale), length*PART_WIDTH(scale), height*PART_HEIGHT(scale)], true);
             // inner emptiness, a bit smaller and shifted down
             translate([0,0,-DOBLOWALL(scale)]) 	
-              cube([width*PART_WIDTH(scale) - 2*DOBLOWALL(scale), length*PART_WIDTH(scale)-2*DOBLOWALL(scale), height*PART_HEIGHT(scale)], true);
+              #cube([width*PART_WIDTH(scale) - 2*DOBLOWALL(scale), length*PART_WIDTH(scale)-2*DOBLOWALL(scale), height*PART_HEIGHT(scale)], true);
           }
           // diamonds
           diamonds (width, length, height, scale=scale);
@@ -589,8 +589,39 @@ module doblobottomnibble_thin(height_mm)
 
 }
 
+/*
+  Hackey--should build shell separately and then insert bottom nibbles
+  currently, has some holes. Even CW is duplo compatible, odd is offset .5
+*/
+module doblo_curve_down(col,row,up,width,length,height,nibbles,size,cw=1){
+  difference(){
+    block_curve_down(col,row,up,width,length,height,nibbles,size,cw=cw);
+    translate([0,0,-0.01])difference(){
+     block(col-cw/2,row,up,width+cw,length,height*2/3,false,size);
+     doblo(col-cw/2,row,up,width+cw,length,height*2/3,false,false,size);
+    }
+  }
+}
 
-module rounded_block(col,row,up,width,length,height,nibbles,size,cw=1){
+module doblo_curve_up(col,row,up,width,length,height,nibbles,size,cw=2,bottom_holes=true){
+  difference(){
+    union(){
+      translate([-0.01,0,0])curve(col+width,row,up,cw,length,height,false,true,size);
+      translate([0.01,0,0])curve(col-1,row,up,cw,length,height,true,true,size);
+      doblo(col,row,up,width,length,height,nibbles,false,size);
+     if(nibbles && cw>1){
+        nibbles(col-floor(cw/2),row,up+height,floor(cw/2),length,size);
+        nibbles(col+width,row,up+height,cw/2,length,size); 
+      }
+    }
+    if (bottom_holes){
+      nibbles(col+width,row,up,ceil(cw),length,DOBLO,filled=true,hscale=1.5);
+      nibbles(col-ceil(cw),row,up,ceil(cw),length,DOBLO,filled=true,hscale=1.5);
+    }
+  }
+}
+
+module block_curve_down(col,row,up,width,length,height,nibbles,size,cw=1){
   //intersection(){
     union(){
       curve(col-1,row,up,cw,length,height,blockType=size);
