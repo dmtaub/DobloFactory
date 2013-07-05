@@ -317,6 +317,36 @@ module bottom_nibbles (width, length, height)
   }
 }
 
+
+module tri_prism(top,side,end)
+{
+  translate([side/2,-end/2,-top/6])rotate([0,-90,0])linear_extrude(height=side) 
+    polygon(points=[[0,0],[top,end],[0,end]],paths=[[0,1,2]]);
+
+}
+
+
+module angle_block (col, row, up, width,length,height,nibbles_on_off, scale) 
+{
+  // build the cube from its center
+  x_0 = col    * PART_WIDTH(scale)  + width  * PART_WIDTH(scale) / 2.0;
+  y_0 = - (row * PART_WIDTH(scale) + length * PART_WIDTH(scale) / 2.0) ;
+  z_0 = up      * PART_HEIGHT(scale)  + height * PART_HEIGHT(scale) / 2.0;
+  top = PART_HEIGHT(scale)*height;
+  side = PART_WIDTH(scale)*width;
+  end = PART_WIDTH(scale)*length;
+  ang = atan(top/end);
+  // the cube is drawn at absolute x,y,z = 0 then moved
+  translate ([x_0, y_0, z_0]) {
+    tri_prism(top,side,end);
+    // nibbles on top
+    if  (nibbles_on_off)
+    {
+      //      (col, row, up, width, length)
+      rotate([ang,0,0])translate([0,0,-top/4])nibbles (-width/2, -length/2, height/2, width, length, scale=scale);
+    }
+  }
+}
 module block (col, row, up, width,length,height,nibbles_on_off, scale) 
   /* Use cases:
      - building blocks for 3D structures (saves times and plastic, use a light fill in skeinforge)
