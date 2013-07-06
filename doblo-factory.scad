@@ -17,6 +17,7 @@
 
 // may change this include based on printer types
 include <lib/doblo-params.scad>;
+NUDGE = .001;  // slight amount to make sure interfaces touch
 
 // -------------------------------- DOBLO and STL merging ------------------------------
 
@@ -320,7 +321,7 @@ module bottom_nibbles (width, length, height)
 
 module tri_prism(top,side,end)
 {
-  translate([side/2,-end/2,-top/6])rotate([0,-90,0])linear_extrude(height=side) 
+  translate([side/2,-end/2,-top/6-NUDGE])rotate([0,-90,0])linear_extrude(height=side) 
     polygon(points=[[0,0],[top,end],[0,end]],paths=[[0,1,2]]);
 
 }
@@ -336,6 +337,9 @@ module angle_block (col, row, up, width,length,height,nibbles_on_off, scale)
   side = PART_WIDTH(scale)*width;
   end = PART_WIDTH(scale)*length;
   ang = atan(top/end);
+  hyp = top/sin(ang);
+  off_y = (hyp-end)/2;
+  off_z = -top/6-NUDGE;
   // the cube is drawn at absolute x,y,z = 0 then moved
   translate ([x_0, y_0, z_0]) {
     tri_prism(top,side,end);
@@ -343,7 +347,7 @@ module angle_block (col, row, up, width,length,height,nibbles_on_off, scale)
     if  (nibbles_on_off)
     {
       //      (col, row, up, width, length)
-      rotate([ang,0,0])translate([0,0,-top/4])nibbles (-width/2, -length/2, height/2, width, length, scale=scale);
+      rotate([ang,0,0])translate([0,off_y,off_z])nibbles (-width/2, -length/2, height/2, width, length, scale=scale);
     }
   }
 }
