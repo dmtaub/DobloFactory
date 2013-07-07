@@ -326,6 +326,10 @@ module tri_prism(top,side,end)
 
 }
 
+module angle_doblo(col,row,up,width,length,width,height,nibbles_on_off,scale){
+  doblo(col,row,up,width,length,height,false,false,scale);
+  angle_block(col,row,up+2,width,length,height,nibbles_on_off,scale);
+}
 
 module angle_block (col, row, up, width,length,height,nibbles_on_off, scale) 
 {
@@ -339,7 +343,9 @@ module angle_block (col, row, up, width,length,height,nibbles_on_off, scale)
   ang = atan(top/end);
   hyp = top/sin(ang);
   off_y = (hyp-end)/2;
-  off_z = -top/6-NUDGE;
+  off_z = -NUDGE  ;//-top/6-NUDGE;
+  oy = (hyp-end)/2;
+  oz=-top/FULL-NUDGE;
   // the cube is drawn at absolute x,y,z = 0 then moved
   translate ([x_0, y_0, z_0]) {
     tri_prism(top,side,end);
@@ -347,7 +353,7 @@ module angle_block (col, row, up, width,length,height,nibbles_on_off, scale)
     if  (nibbles_on_off)
     {
       //      (col, row, up, width, length)
-      rotate([ang,0,0])translate([0,off_y,off_z])nibbles (-width/2, -length/2, height/2, width, length, scale=scale);
+      translate([0,oy,oz])rotate([ang,0,0])translate([0,off_y,off_z])nibbles (-width/2, -length/2, height/2, width, length, scale=scale);
     }
   }
 }
