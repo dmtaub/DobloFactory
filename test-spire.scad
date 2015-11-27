@@ -27,7 +27,7 @@ module spire( col, row, up, side, height, nibbles_on_off, scale){
   ratio = 1/8;
   c_h = high*(1-ratio);
   s_h = high*ratio;
-    
+  echo(side);
   translate ([x_0, y_0, z_0]) {
       //the doblo
      union () {
@@ -45,7 +45,7 @@ module spire( col, row, up, side, height, nibbles_on_off, scale){
         if  (nibbles_on_off)
         {
             //           (col,    row,        up,  width, length)
-            nibbles (0.5-side/2, 0.5-side/2, height/2, 1, 1, scale = scale);
+            nibbles (0.5-side/2.0, 0.5-side/2.0, height/2, side-1, side-1, scale = scale);
         }
 
      }
